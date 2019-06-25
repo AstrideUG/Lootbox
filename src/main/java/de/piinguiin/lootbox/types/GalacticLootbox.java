@@ -10,14 +10,14 @@ import java.util.List;
 
 public class GalacticLootbox  extends Lootbox {
 
-    public GalacticLootbox(String name, String displayName, String skinUrl, List<ParticleEffect> particleEffects,
+    public GalacticLootbox(String id, String displayName, String skinUrl, List<ParticleEffect> particleEffects,
                            List<Color> fallingColors, List<LootboxPrize> prizes, int buyPrice, boolean mergable) {
-        super(name, displayName, skinUrl, particleEffects, fallingColors, prizes, buyPrice, mergable);
+        super(id, displayName, skinUrl, particleEffects, fallingColors, prizes, buyPrice, mergable);
     }
 
     @Override
-    public String getName() {
-        return super.getName();
+    public String getId() {
+        return super.getId();
     }
 
     @Override

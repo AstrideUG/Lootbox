@@ -1,27 +1,29 @@
 package de.piinguiin.lootbox.impl;
 
-import de.piinguiin.lootbox.api.ILootbox;
+import de.piinguiin.lootbox.api.Animation;
+import de.piinguiin.lootbox.factories.AnimationFactory;
 import de.piinguiin.lootbox.particle.ParticleEffect;
 import de.piinguiin.lootbox.prizes.LootboxPrize;
 import de.piinguiin.lootbox.utils.item.SkullMaker;
 import org.bukkit.Color;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public abstract class Lootbox implements ILootbox {
+public class Lootbox implements de.piinguiin.lootbox.api.Lootbox {
 
-    String name,displayName,skinUrl;
-    List<ParticleEffect> particleEffects;
-    List<Color> fallingColors;
-    List<LootboxPrize> prizes;
-    ItemStack head;
-    int buyPrice;
-    boolean mergable;
+    private String id,displayName,skinUrl;
+    private List<ParticleEffect> particleEffects;
+    private List<Color> fallingColors;
+    private List<LootboxPrize> prizes;
+    private ItemStack head;
+    private int buyPrice;
+    private boolean mergable;
 
-    public Lootbox(String name, String displayName, String skinUrl, List<ParticleEffect> particleEffects,
+    public Lootbox(String id, String displayName, String skinUrl, List<ParticleEffect> particleEffects,
                    List<Color> fallingColors, List<LootboxPrize> prizes, int buyPrice, boolean mergable) {
-        this.name = name;
+        this.id = id;
         this.displayName = displayName;
         this.skinUrl = skinUrl;
         this.particleEffects = particleEffects;
@@ -38,8 +40,8 @@ public abstract class Lootbox implements ILootbox {
     }
 
     @Override
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -80,5 +82,14 @@ public abstract class Lootbox implements ILootbox {
     @Override
     public boolean isMergable() {
         return mergable;
+    }
+
+    @Override
+    public void startAnimation(Player player, de.piinguiin.lootbox.api.Lootbox lootbox) {
+
+        Animation animation = AnimationFactory.getAnimationFromLootbox(lootbox);
+
+
+
     }
 }

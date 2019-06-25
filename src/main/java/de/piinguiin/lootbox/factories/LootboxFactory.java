@@ -1,12 +1,11 @@
 package de.piinguiin.lootbox.factories;
 
-import de.piinguiin.lootbox.api.ILootbox;
-import de.piinguiin.lootbox.types.MoonLootbox;
+import de.piinguiin.lootbox.api.Lootbox;
 
 public class LootboxFactory {
 
-    public static ILootbox getLootboxFromBSON(){
-        return new MoonLootbox();
+    public static Lootbox getLootboxFromGSON(String id){
+        return null;
     }
 
 }

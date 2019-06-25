@@ -3,13 +3,14 @@ package de.piinguiin.lootbox.api;
 import de.piinguiin.lootbox.particle.ParticleEffect;
 import de.piinguiin.lootbox.prizes.LootboxPrize;
 import org.bukkit.Color;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public interface ILootbox {
+public interface Lootbox {
 
-    String getName();
+    String getId();
 
     String getDisplayName();
 
@@ -26,4 +27,7 @@ public interface ILootbox {
     int getBuyingPrice();
 
     boolean isMergable();
+
+    void startAnimation(Player player, Lootbox lootbox);
+
 }
