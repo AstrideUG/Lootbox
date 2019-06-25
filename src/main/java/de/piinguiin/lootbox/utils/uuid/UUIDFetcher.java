@@ -1,4 +1,4 @@
-package de.piinguiin.lootbox.utils;
+package de.piinguiin.lootbox.utils.uuid;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

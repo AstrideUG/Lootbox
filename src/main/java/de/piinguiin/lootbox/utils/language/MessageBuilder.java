@@ -1,4 +1,4 @@
-package de.piinguiin.lootbox.utils;
+package de.piinguiin.lootbox.utils.language;
 
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
