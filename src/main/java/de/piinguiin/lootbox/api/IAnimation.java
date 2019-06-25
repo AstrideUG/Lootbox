@@ -1,4 +1,7 @@
 package de.piinguiin.lootbox.api;
 
-public class IAnimation {
+public interface IAnimation {
+
+    public void tick();
+
 }
