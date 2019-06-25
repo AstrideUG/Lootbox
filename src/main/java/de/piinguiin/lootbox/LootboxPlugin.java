@@ -4,7 +4,7 @@ import de.piinguiin.lootbox.io.FileManager;
 import de.piinguiin.lootbox.types.LootboxManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class LootboxPlugin  extends JavaPlugin {
+public class LootboxPlugin extends JavaPlugin {
 
     private static LootboxPlugin plugin;
     private static FileManager fileManager;
@@ -20,7 +20,7 @@ public class LootboxPlugin  extends JavaPlugin {
         plugin = this;
         fileManager = new FileManager();
         lootboxManager = new LootboxManager();
-        log("finished initialization.");
+        log("finished initialization. ");
     }
 
     public static LootboxPlugin getPlugin() {
@@ -35,11 +35,11 @@ public class LootboxPlugin  extends JavaPlugin {
         return lootboxManager;
     }
 
-    private static void log(String message) {
+    private static void log(final String message) {
         plugin.getLogger().info(message);
     }
 
-    public static void log(Exception ex) {
+    public static void log(final Exception ex) {
         log(ex.getMessage());
     }
 }
