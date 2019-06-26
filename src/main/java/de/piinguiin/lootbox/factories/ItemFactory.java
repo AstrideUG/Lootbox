@@ -1,5 +1,6 @@
-package de.piinguiin.lootbox.utils.item;
+package de.piinguiin.lootbox.factories;
 
+import de.piinguiin.lootbox.utils.item.SkullMaker;
 import org.bukkit.inventory.ItemStack;
 
 public class ItemFactory {
