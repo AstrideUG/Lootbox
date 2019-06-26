@@ -20,6 +20,11 @@
             <id>paper-repo</id>
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
+
+        <repository>
+            <id>elmakers-repo</id>
+            <url>http://maven.elmakers.com/repository/ </url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -62,6 +67,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>de.slikey</groupId>
+            <artifactId>EffectLib</artifactId>
+            <version>1.4</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>
