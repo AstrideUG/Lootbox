@@ -31,6 +31,7 @@ public final class DefaultFallingActiveAnimation extends AbstractActiveAnimation
         if (currentLocation != null)
             if (isAirDownwards()) {
                 //TODO spawn particle
+                //    ParticleEffect.FLAME.display(currentLocation, 2000);
                 currentLocation.subtract(vector); //TODO configure substraction vector
             } else finish();
         else {

@@ -1,9 +1,5 @@
 package de.piinguiin.lootbox.utils.item;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -12,19 +8,23 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionType;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ItemCreator {
     private Material mat;
     private Short data;
     private Integer amount;
     private String display;
     private List<String> lore;
-    private Map<Enchantment, Integer> enchantments = new HashMap();
+    private Map<Enchantment, Integer> enchantments = new HashMap<>();
     private Potion potion;
 
     public ItemCreator() {
     }
 
-    public ItemCreator(ItemStack item) {
+    public ItemCreator(final ItemStack item) {
         this.mat = item.getType();
         this.data = Short.valueOf(item.getDurability());
         this.amount = Integer.valueOf(item.getAmount());
@@ -41,37 +41,37 @@ public class ItemCreator {
         }
     }
 
-    public ItemCreator material(Material mat) {
+    public ItemCreator material(final Material mat) {
         this.mat = mat;
         return this;
     }
 
-    public ItemCreator data(short data) {
+    public ItemCreator data(final short data) {
         this.data = Short.valueOf(data);
         return this;
     }
 
-    public ItemCreator amount(int amount) {
+    public ItemCreator amount(final int amount) {
         this.amount = Integer.valueOf(amount);
         return this;
     }
 
-    public ItemCreator displayName(String display) {
+    public ItemCreator displayName(final String display) {
         this.display = display;
         return this;
     }
 
-    public ItemCreator lore(List<String> lore) {
+    public ItemCreator lore(final List<String> lore) {
         this.lore = lore;
         return this;
     }
 
-    public ItemCreator addEnchant(Enchantment ench, int level) {
+    public ItemCreator addEnchant(final Enchantment ench, final int level) {
         this.enchantments.put(ench, Integer.valueOf(level));
         return this;
     }
 
-    public ItemCreator removeEnchant(Enchantment ench) {
+    public ItemCreator removeEnchant(final Enchantment ench) {
         if (!this.enchantments.containsKey(ench)) {
             return this;
         }
@@ -79,8 +79,8 @@ public class ItemCreator {
         return this;
     }
 
-    public ItemCreator asPotion(PotionEffect effect, boolean splash) {
-        Potion potion = new Potion(PotionType.getByEffect(effect.getType()));
+    public ItemCreator asPotion(final PotionEffect effect, final boolean splash) {
+        final Potion potion = new Potion(PotionType.getByEffect(effect.getType()));
         potion.getEffects().add(effect);
         potion.setLevel(effect.getAmplifier());
         potion.setSplash(splash);
@@ -137,7 +137,7 @@ public class ItemCreator {
             item = new ItemStack(this.mat, this.amount.intValue(), this.data.shortValue());
         }
         if ((this.display != null) || (this.lore != null)) {
-            ItemMeta meta = item.getItemMeta();
+            final ItemMeta meta = item.getItemMeta();
             if (this.display != null) {
                 meta.setDisplayName(this.display);
             }

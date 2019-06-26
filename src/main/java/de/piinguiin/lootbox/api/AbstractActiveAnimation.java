@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public abstract class AbstractActiveAnimation extends AbstractLocationable implements ActiveAnimation {
 
+    @SuppressWarnings("WeakerAccess")
     protected int ticks;
     private int taskId;
     @SuppressWarnings("WeakerAccess")
@@ -21,11 +22,14 @@ public abstract class AbstractActiveAnimation extends AbstractLocationable imple
     @Override
     public void start(final Location location) {
         currentLocation = location;
+        Bukkit.broadcastMessage("Started " + getClass().getSimpleName() + " with location " + location);
+
         taskId = new BukkitRunnable() {
             @Override
             public void run() {
                 if (ticks > 0) {
                     tick();
+                    Bukkit.broadcastMessage("ticked " + getClass().getSimpleName() + " on location: " + currentLocation);
                     ticks--;
                 } else finish();
             }
@@ -33,7 +37,8 @@ public abstract class AbstractActiveAnimation extends AbstractLocationable imple
     }
 
     @Override
-    public final void finish() {
+    public void finish() {
+        Bukkit.broadcastMessage("finished " + getClass().getSimpleName() + " on location: " + currentLocation);
         finished = true;
         Bukkit.getScheduler().cancelTask(taskId);
     }

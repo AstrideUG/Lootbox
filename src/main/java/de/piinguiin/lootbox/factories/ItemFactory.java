@@ -2,10 +2,13 @@ package de.piinguiin.lootbox.factories;
 
 import de.piinguiin.lootbox.utils.item.SkullMaker;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemFactory {
 
-    public static ItemStack getAnimationHead(final String id) {
+    @Nullable
+    public static ItemStack getAnimationHead(@NotNull final String id) {
 
         final SkullMaker skullMaker = new SkullMaker();
 
@@ -21,12 +24,15 @@ public class ItemFactory {
                 skullMaker.withSkinUrl("http://textures.minecraft.net/texture/87d66f93909a6d4641c653082e04749691de82cf77232bd20ab32adf4f");
                 break;
 
-
             //§a§lC§b§lo§e§ls§6§lm§c§3li§4§lc
             case "cosmic":
                 skullMaker.withName("§c§lC§6§lo§e§ls§a§lm§b§li§3§lc§9§lB§5§lo§d§lx");
                 skullMaker.withSkinUrl("http://textures.minecraft.net/texture/9d3d250e25bbca3a62be5b3ef02cfcab6dcdc424884c9a7d5cc95c9d0");
                 break;
+
+            default:
+                return null;
+
 
         }
 

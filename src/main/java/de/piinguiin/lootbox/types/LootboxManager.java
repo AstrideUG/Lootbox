@@ -1,52 +1,46 @@
 package de.piinguiin.lootbox.types;
 
-import com.sun.istack.internal.Nullable;
 import de.piinguiin.lootbox.api.Lootbox;
 import de.piinguiin.lootbox.factories.LootboxFactory;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class LootboxManager {
 
-    private HashMap<String, Lootbox> lootboxes;
-    private HashMap<Lootbox, Player> runningLootboxOpening;
+    private final Map<String, Lootbox> lootboxes;
+    private final Map<Player, Lootbox> runningLootboxOpening;
 
-    public LootboxManager(){
+    public LootboxManager() {
         this.lootboxes = new HashMap<>();
         this.runningLootboxOpening = new HashMap<>();
         loadLootboxes();
     }
 
-    private void loadLootboxes(){
+    private void loadLootboxes() {
 
-        Lootbox moon = LootboxFactory.getLootboxFromGSON("Moon");
-        Lootbox galactic = LootboxFactory.getLootboxFromGSON("Galatic");
-        Lootbox cosmic = LootboxFactory.getLootboxFromGSON("Cosmic");
+        final Lootbox moon = LootboxFactory.getLootboxFromGSON("Moon");
+        final Lootbox galactic = LootboxFactory.getLootboxFromGSON("Galatic");
+        final Lootbox cosmic = LootboxFactory.getLootboxFromGSON("Cosmic");
 
-        this.lootboxes.put("Moon",moon);
-        this.lootboxes.put("Galatic",galactic);
-        this.lootboxes.put("Cosmic",cosmic);
+        this.lootboxes.put("Moon", moon);
+        this.lootboxes.put("Galatic", galactic);
+        this.lootboxes.put("Cosmic", cosmic);
 
     }
 
-    public HashMap<String, Lootbox> getLootboxes() {
+    public Map<String, Lootbox> getLootboxes() {
         return lootboxes;
     }
 
     @Nullable
-    public Lootbox getLootbox(String id){
-        return this.lootboxes.getOrDefault(id,null);
+    public Lootbox getLootbox(final String id) {
+        return this.lootboxes.getOrDefault(id, null);
     }
 
-    public void startLootbox(Lootbox lootbox, Player player){
-
-        this.runningLootboxOpening.put(lootbox,player);
-
+    public Map<Player, Lootbox> getRunningLootboxOpening() {
+        return runningLootboxOpening;
     }
-
-    public void stopLootbox(Lootbox lootbox){
-        this.runningLootboxOpening.remove(lootbox);
-    }
-
 }

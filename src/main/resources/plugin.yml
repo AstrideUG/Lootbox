@@ -1,4 +1,4 @@
 name: Lootbox
 version: 0.1.0
 author: Piinguiin
-main: de.piinguiin.LootboxPlugin
+main: de.piinguiin.lootbox.LootboxPlugin

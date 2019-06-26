@@ -1,5 +1,6 @@
 package de.piinguiin.lootbox;
 
+import de.piinguiin.lootbox.animations.events.PlayerInteractAtHead;
 import de.piinguiin.lootbox.io.FileManager;
 import de.piinguiin.lootbox.types.LootboxManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,6 +21,7 @@ public class LootboxPlugin extends JavaPlugin {
         plugin = this;
         fileManager = new FileManager();
         lootboxManager = new LootboxManager();
+        new PlayerInteractAtHead(this);
         log("finished initialization. ");
     }
 

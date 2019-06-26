@@ -8,6 +8,7 @@ public class DefaultExplosionAnimation extends AbstractLocationable implements E
     @Override
     public void start(final Location location) {
         //TODO spawn explosion particle
+        //  ParticleEffect.LARGE_EXPLODE.display(location, 2000);
     }
 
 }

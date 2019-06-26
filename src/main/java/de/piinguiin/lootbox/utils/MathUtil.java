@@ -6,129 +6,111 @@ import org.bukkit.util.Vector;
 
 import java.util.Random;
 
-public class MathUtil
-{
-    public static final Vector rotateAroundAxisX(Vector v, double angle)
-    {
-        double cos = Math.cos(angle);
-        double sin = Math.sin(angle);
-        double y = v.getY() * cos - v.getZ() * sin;
-        double z = v.getY() * sin + v.getZ() * cos;
+public class MathUtil {
+    public static Vector rotateAroundAxisX(final Vector v, final double angle) {
+        final double cos = Math.cos(angle);
+        final double sin = Math.sin(angle);
+        final double y = v.getY() * cos - v.getZ() * sin;
+        final double z = v.getY() * sin + v.getZ() * cos;
         return v.setY(y).setZ(z);
     }
 
-    public static final Vector rotateAroundAxisY(Vector v, double angle)
-    {
-        double cos = Math.cos(angle);
-        double sin = Math.sin(angle);
-        double x = v.getX() * cos + v.getZ() * sin;
-        double z = v.getX() * -sin + v.getZ() * cos;
+    public static Vector rotateAroundAxisY(final Vector v, final double angle) {
+        final double cos = Math.cos(angle);
+        final double sin = Math.sin(angle);
+        final double x = v.getX() * cos + v.getZ() * sin;
+        final double z = v.getX() * -sin + v.getZ() * cos;
         return v.setX(x).setZ(z);
     }
 
-    public static final Vector rotateAroundAxisZ(Vector v, double angle)
-    {
-        double cos = Math.cos(angle);
-        double sin = Math.sin(angle);
-        double x = v.getX() * cos - v.getY() * sin;
-        double y = v.getX() * sin + v.getY() * cos;
+    public static Vector rotateAroundAxisZ(final Vector v, final double angle) {
+        final double cos = Math.cos(angle);
+        final double sin = Math.sin(angle);
+        final double x = v.getX() * cos - v.getY() * sin;
+        final double y = v.getX() * sin + v.getY() * cos;
         return v.setX(x).setY(y);
     }
 
-    public static final Vector rotateVector(Vector v, double angleX, double angleY, double angleZ)
-    {
+    public static Vector rotateVector(final Vector v, final double angleX, final double angleY, final double angleZ) {
         rotateAroundAxisX(v, angleX);
         rotateAroundAxisY(v, angleY);
         rotateAroundAxisZ(v, angleZ);
         return v;
     }
 
-    public static final double angleToXAxis(Vector vector)
-    {
+    public static double angleToXAxis(final Vector vector) {
         return Math.atan2(vector.getX(), vector.getY());
     }
 
 
-    public static Vector getBackVector(Location loc)
-    {
-        float newZ = (float)(loc.getZ() + 0.75D * Math.sin(Math.toRadians(loc.getYaw() + 90.0F)));
-        float newX = (float)(loc.getX() + 0.75D * Math.cos(Math.toRadians(loc.getYaw() + 90.0F)));
+    public static Vector getBackVector(final Location loc) {
+        final float newZ = (float) (loc.getZ() + 0.75D * Math.sin(Math.toRadians(loc.getYaw() + 90.0F)));
+        final float newX = (float) (loc.getX() + 0.75D * Math.cos(Math.toRadians(loc.getYaw() + 90.0F)));
         return new Vector(newX - loc.getX(), 0.0D, newZ - loc.getZ());
     }
 
-    public static final Vector rotateVectorYX(Vector v, float yawDegrees, float pitchDegrees)
-    {
-        double yaw = Math.toRadians(-1.0F * yawDegrees);
-        double pitch = pitchDegrees;
+    public static Vector rotateVectorYX(final Vector v, final float yawDegrees, final float pitchDegrees) {
+        final double yaw = Math.toRadians(-1.0F * yawDegrees);
 
-        double cosYaw = Math.cos(yaw);
-        double cosPitch = Math.cos(pitch);
-        double sinYaw = Math.sin(yaw);
-        double sinPitch = Math.sin(pitch);
+        final double cosYaw = Math.cos(yaw);
+        final double cosPitch = Math.cos((double) pitchDegrees);
+        final double sinYaw = Math.sin(yaw);
+        final double sinPitch = Math.sin((double) pitchDegrees);
 
-        double initialY = v.getY();
+        final double initialY = v.getY();
         double initialZ = v.getZ();
         double z = initialY * sinPitch - initialZ * cosPitch;
-        double y = initialY * cosPitch + initialZ * sinPitch;
+        final double y = initialY * cosPitch + initialZ * sinPitch;
 
         initialZ = z;
-        double initialX = v.getX();
+        final double initialX = v.getX();
         z = initialZ * cosYaw - initialX * sinYaw;
-        double x = initialZ * sinYaw + initialX * cosYaw;
+        final double x = initialZ * sinYaw + initialX * cosYaw;
 
         return new Vector(x, y, z);
     }
 
-    public static Vector getRandomCircleVector()
-    {
-        Random rndm = new Random();
-        double rnd = rndm.nextDouble() * 2.0D * 3.141592653589793D;
-        double x = Math.cos(rnd);
-        double z = Math.sin(rnd);
+    public static Vector getRandomCircleVector() {
+        final Random rndm = new Random();
+        final double rnd = rndm.nextDouble() * 2.0D * 3.141592653589793D;
+        final double x = Math.cos(rnd);
+        final double z = Math.sin(rnd);
 
         return new Vector(x, 0.0D, z);
     }
 
-    public static double randomDouble(double min, double max)
-    {
+    public static double randomDouble(final double min, final double max) {
         return Math.random() < 0.5D ? (1.0D - Math.random()) * (max - min) + min : Math.random() * (max - min) + min;
     }
 
-    public static float randomRangeFloat(float min, float max)
-    {
-        return (float)(Math.random() < 0.5D ? (1.0D - Math.random()) * (max - min) + min :
+    public static float randomRangeFloat(final float min, final float max) {
+        return (float) (Math.random() < 0.5D ? (1.0D - Math.random()) * (max - min) + min :
                 Math.random() * (max - min) + min);
     }
 
-    public static int randomRangeInt(int min, int max)
-    {
-        return (int)(Math.random() < 0.5D ? (1.0D - Math.random()) * (max - min + 1) + min :
+    public static int randomRangeInt(final int min, final int max) {
+        return (int) (Math.random() < 0.5D ? (1.0D - Math.random()) * (max - min + 1) + min :
                 Math.random() * (max - min + 1) + min);
     }
 
-    public static double offset(Entity a, Entity b)
-    {
+    public static double offset(final Entity a, final Entity b) {
         return offset(a.getLocation().toVector(), b.getLocation().toVector());
     }
 
-    public static double offset(Location a, Location b)
-    {
+    public static double offset(final Location a, final Location b) {
         return offset(a.toVector(), b.toVector());
     }
 
-    public static double offset(Vector a, Vector b)
-    {
+    public static double offset(final Vector a, final Vector b) {
         return a.subtract(b).length();
     }
 
-    public static double square(double num)
-    {
+    public static double square(final double num) {
         return num * num;
     }
 
-    public static int floor(double num)
-    {
-        int floor = (int)num;
-        return floor == num ? floor : floor - (int)(Double.doubleToRawLongBits(num) >>> 63);
+    public static int floor(final double num) {
+        final int floor = (int) num;
+        return floor == num ? floor : floor - (int) (Double.doubleToRawLongBits(num) >>> 63);
     }
 }
