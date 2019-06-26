@@ -35,7 +35,7 @@ public class LootboxPlugin extends JavaPlugin {
         return lootboxManager;
     }
 
-    private static void log(final String message) {
+    public static void log(final String message) {
         plugin.getLogger().info(message);
     }
 

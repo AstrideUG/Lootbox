@@ -4,4 +4,6 @@ public interface Finishable {
 
     void finish();
 
+    boolean isFinished();
+
 }

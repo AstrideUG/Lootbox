@@ -1,19 +1,19 @@
 package de.piinguiin.lootbox.impl;
 
 import de.piinguiin.lootbox.LootboxPlugin;
-import de.piinguiin.lootbox.api.Animation;
+import de.piinguiin.lootbox.api.ActiveAnimation;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-public abstract class BukkitTaskAnimation implements Animation {
+public abstract class BukkitTaskActiveAnimation implements ActiveAnimation {
 
     protected final Location startLocation;
     protected int ticks;
     private BukkitTask task;
 
 
-    public BukkitTaskAnimation(final int ticks, final Location startLocation) {
+    public BukkitTaskActiveAnimation(final int ticks, final Location startLocation) {
         this.ticks = ticks;
         this.startLocation = startLocation.clone();
     }
