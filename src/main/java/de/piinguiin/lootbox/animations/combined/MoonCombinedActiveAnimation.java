@@ -6,7 +6,9 @@ import de.piinguiin.lootbox.animations.giving.DefaultGivingActiveAnimation;
 import de.piinguiin.lootbox.animations.headspin.DefaultHeadSpinActiveAnimation;
 import de.piinguiin.lootbox.api.combined.AbstractCombinedActiveAnimation;
 import de.piinguiin.lootbox.factories.ItemFactory;
+import de.piinguiin.lootbox.utils.item.ItemCreator;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,11 +19,10 @@ public final class MoonCombinedActiveAnimation extends AbstractCombinedActiveAni
 
     public MoonCombinedActiveAnimation(@NotNull final Location startLocation, final Entity target) {
         super(Arrays.asList(
-                new DefaultFallingActiveAnimation(startLocation, 100),
+                new DefaultFallingActiveAnimation(startLocation, 75),
                 new DefaultExplosionAnimation(startLocation),
                 new DefaultHeadSpinActiveAnimation(startLocation, Objects.requireNonNull(ItemFactory.getAnimationHead("moon"))),
-                new DefaultGivingActiveAnimation(startLocation, target, Objects.requireNonNull(ItemFactory.getAnimationHead("moon")))
-        ));
+                new DefaultGivingActiveAnimation(startLocation, target, new ItemCreator().material(Material.DOUBLE_PLANT).displayName("§6§lwin").build())));
     }
 
 }

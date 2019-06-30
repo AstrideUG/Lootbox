@@ -30,6 +30,7 @@ public class ParticleBuilder {
         this.offY = 0;
         this.offZ = 0;
         this.circleRadius = 0.0;
+        this.form = ParticleForm.DEFAULT;
     }
 
     public ParticleBuilder setEnumParticle(final EnumParticle enumParticle) {

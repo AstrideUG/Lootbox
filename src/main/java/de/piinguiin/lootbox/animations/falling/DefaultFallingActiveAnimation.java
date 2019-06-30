@@ -3,7 +3,6 @@ package de.piinguiin.lootbox.animations.falling;
 import de.piinguiin.lootbox.api.AbstractActiveAnimation;
 import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
 import net.minecraft.server.v1_8_R3.EnumParticle;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -20,7 +19,7 @@ public final class DefaultFallingActiveAnimation extends AbstractActiveAnimation
         vector = new Vector(0, 0.3, 0);
         final double hight = ticks * vector.getY();
 
-        this.currentLocation = location.clone().add(0, hight, 0);
+        this.currentLocation = location.clone().add(0.5, hight, 0.5);
 
     }
 
@@ -35,9 +34,10 @@ public final class DefaultFallingActiveAnimation extends AbstractActiveAnimation
 
             new ParticleBuilder(currentLocation)
                     .setEnumParticle(EnumParticle.CLOUD)
-                    .setAmount(5)
+                    .setAmount(2)
                     .setSpeed(0)
                     .play();
+
 
             currentLocation.subtract(vector); //TODO configure substraction vector
         } else finish();
@@ -48,14 +48,8 @@ public final class DefaultFallingActiveAnimation extends AbstractActiveAnimation
      */
     private boolean isAirDownwards() throws NullPointerException {
         final Material type = currentLocation.getBlock().getRelative(BlockFace.DOWN).getType();
-        Bukkit.broadcastMessage("§b§lType: " + type);
+        // Bukkit.broadcastMessage("§b§lType: " + type);
         return type.equals(Material.AIR);
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        Thread.dumpStack();
-
-    }
 }

@@ -15,10 +15,13 @@ public class DefaultExplosionAnimation extends AbstractLocationable implements E
     @Override
     public void start(@NotNull final Location location) {
         new ParticleBuilder(currentLocation)
-                .setEnumParticle(EnumParticle.EXPLOSION_LARGE)
+                .setEnumParticle(EnumParticle.EXPLOSION_HUGE)
                 .setAmount(2)
                 .setSpeed(0)
                 .play();
     }
 
+
+    //MoonFalling -> MoonExplosion -> MoonHeadspin -> MoonGiving
+    //GalacticFalling -> GalacticExplosion -> GalacticHeadspin -> GalacticGiving
 }

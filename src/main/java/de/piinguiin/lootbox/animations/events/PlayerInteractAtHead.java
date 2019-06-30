@@ -7,7 +7,6 @@ import de.piinguiin.lootbox.api.Animation;
 import de.piinguiin.lootbox.api.Lootbox;
 import de.piinguiin.lootbox.api.combined.CombinedActiveAnimation;
 import net.darkdevelopers.darkbedrock.darkness.spigot.listener.Listener;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -34,9 +33,7 @@ public class PlayerInteractAtHead extends Listener {
 
         if (block.getType().equals(Material.REDSTONE_BLOCK)) {
             event.setCancelled(true);
-            player.sendMessage("staaaaaaaaaaaaaaart");
             final MoonCombinedActiveAnimation moonCombinedActiveAnimation = new MoonCombinedActiveAnimation(block.getLocation(), player);
-            Bukkit.broadcastMessage(moonCombinedActiveAnimation.toString());
             moonCombinedActiveAnimation.start(block.getLocation().clone().add(0.5, 0, 0.5));
         }
 

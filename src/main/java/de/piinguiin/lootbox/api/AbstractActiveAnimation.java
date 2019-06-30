@@ -2,7 +2,6 @@ package de.piinguiin.lootbox.api;
 
 import de.piinguiin.lootbox.LootboxPlugin;
 import de.piinguiin.lootbox.api.locationable.AbstractLocationable;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
@@ -28,15 +27,15 @@ public abstract class AbstractActiveAnimation extends AbstractLocationable imple
     @Override
     public void start(@NotNull final Location location) {
         currentLocation = location;
-        Bukkit.broadcastMessage("§5Started " + getClass() + " with location " + location);
+        //      Bukkit.broadcastMessage("§5Started " + getClass() + " with location " + location);
 
         taskId = new BukkitRunnable() {
             @Override
             public void run() {
-                Bukkit.broadcastMessage("§3§lTicks: " + ticks);
+                //     Bukkit.broadcastMessage("§3§lTicks: " + ticks);
                 if (ticks > 0) {
                     tick();
-                    Bukkit.broadcastMessage("§5§nticked " + AbstractActiveAnimation.this.getClass().getSimpleName() + " on location: " + currentLocation);
+                    //        Bukkit.broadcastMessage("§5§nticked " + AbstractActiveAnimation.this.getClass().getSimpleName() + " on location: " + currentLocation);
                     ticks--;
                 } else finish();
             }
@@ -45,10 +44,10 @@ public abstract class AbstractActiveAnimation extends AbstractLocationable imple
 
     @Override
     public void finish() {
-        Bukkit.broadcastMessage("§9finished " + getClass().getSimpleName() + " on location: " + currentLocation);
+        //   Bukkit.broadcastMessage("§9finished " + getClass().getSimpleName() + " on location: " + currentLocation);
 
         finished = true;
-        Bukkit.getScheduler().cancelTask(taskId);
+        //  Bukkit.getScheduler().cancelTask(taskId);
     }
 
     @Override

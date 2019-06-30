@@ -4,7 +4,6 @@ import de.piinguiin.lootbox.api.AbstractActiveAnimation;
 import de.piinguiin.lootbox.api.ActiveAnimation;
 import de.piinguiin.lootbox.api.Animation;
 import de.piinguiin.lootbox.api.startable.Startable;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +18,7 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
         super(Integer.MAX_VALUE);
         this.animations = animations;
         this.currentAnimationPosition = -1;
-        Bukkit.broadcastMessage("init " + getClass().getSimpleName() + " with " + toString());
+        //    Bukkit.broadcastMessage("init " + getClass().getSimpleName() + " with " + toString());
 
     }
 
@@ -35,19 +34,19 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
         if (currentAnimationPosition < animations.size()) {
             final Animation currentAnimation = animations.get(currentAnimationPosition);
             currentLocation = currentAnimation.getCurrentLocation();
-            Bukkit.broadcastMessage("bbb");
+            //    Bukkit.broadcastMessage("bbb");
             if (currentAnimation instanceof ActiveAnimation) {
-                Bukkit.broadcastMessage("ccc");
+                //       Bukkit.broadcastMessage("ccc");
                 if (((ActiveAnimation) currentAnimation).isFinished()) {
                     startNext(currentLocation);
-                    Bukkit.broadcastMessage("ddd1");
-                } else Bukkit.broadcastMessage("ddd2");
+                    //             Bukkit.broadcastMessage("ddd1");
+                } //else Bukkit.broadcastMessage("ddd2");
             } else {
-                Bukkit.broadcastMessage("eee");
+                // Bukkit.broadcastMessage("eee");
                 startNext(currentLocation);
             }
         } else finish();
-        Bukkit.broadcastMessage("fff");
+        // Bukkit.broadcastMessage("fff");
     }
 
     @Override
@@ -65,13 +64,13 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
 
 
         this.currentAnimationPosition++;
-        Bukkit.broadcastMessage("§d§l1");
+        //    Bukkit.broadcastMessage("§d§l1");
 
         final Startable nextAnimation = animations.get(currentAnimationPosition);
-        Bukkit.broadcastMessage("§enextAnimation for " + getClass().getSimpleName() + " is " + nextAnimation);
-        Bukkit.broadcastMessage("§d§l2");
+        //    Bukkit.broadcastMessage("§enextAnimation for " + getClass().getSimpleName() + " is " + nextAnimation);
+        //     Bukkit.broadcastMessage("§d§l2");
         nextAnimation.start(location);
-        Bukkit.broadcastMessage("§d§l3");
+        //   Bukkit.broadcastMessage("§d§l3");
     }
 
     @Override
