@@ -5,8 +5,8 @@ import de.piinguiin.lootbox.api.ActiveAnimation;
 import de.piinguiin.lootbox.api.Animation;
 import de.piinguiin.lootbox.api.startable.Startable;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -18,29 +18,22 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
     public AbstractCombinedActiveAnimation(final List<Animation> animations) {
         super(Integer.MAX_VALUE);
         this.animations = animations;
-        this.currentAnimationPosition = 0;
+        this.currentAnimationPosition = -1;
         Bukkit.broadcastMessage("init " + getClass().getSimpleName() + " with " + toString());
 
     }
 
     @Override
-    public void start(final Location location) {
+    public void start(@NotNull final Location location) {
         super.start(location);
         startNext(location);
     }
 
     @Override
     public final void tick() {
-        Bukkit.broadcastMessage(ChatColor.RED + "runned tick in " + getClass().getSimpleName() + "(" + toString() + ")");
-
-        Bukkit.broadcastMessage(ChatColor.GREEN + "is finished" + isFinished());
-        Bukkit.broadcastMessage(ChatColor.DARK_BLUE + "animations size" + animations.size());
-        Bukkit.broadcastMessage(ChatColor.DARK_BLUE + "currentAnimationPosition" + currentAnimationPosition);
-        Bukkit.broadcastMessage(ChatColor.AQUA + "if " + (currentAnimationPosition < animations.size()));
 
         if (currentAnimationPosition < animations.size()) {
             final Animation currentAnimation = animations.get(currentAnimationPosition);
-            Bukkit.broadcastMessage("aaa");
             currentLocation = currentAnimation.getCurrentLocation();
             Bukkit.broadcastMessage("bbb");
             if (currentAnimation instanceof ActiveAnimation) {
@@ -48,12 +41,6 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
                 if (((ActiveAnimation) currentAnimation).isFinished()) {
                     startNext(currentLocation);
                     Bukkit.broadcastMessage("ddd1");
-
-                    try {
-                        Thread.sleep(10000);
-                    } catch (final InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 } else Bukkit.broadcastMessage("ddd2");
             } else {
                 Bukkit.broadcastMessage("eee");
@@ -73,10 +60,18 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
         return currentAnimationPosition;
     }
 
-    private void startNext(final Location location) {
-        final Startable nextAnimation = animations.get(currentAnimationPosition);
-        nextAnimation.start(location);
+    private void startNext(@NotNull final Location location) {
+        if (location == null) throw new IllegalArgumentException("location for startNext can not be null");
+
+
         this.currentAnimationPosition++;
+        Bukkit.broadcastMessage("§d§l1");
+
+        final Startable nextAnimation = animations.get(currentAnimationPosition);
+        Bukkit.broadcastMessage("§enextAnimation for " + getClass().getSimpleName() + " is " + nextAnimation);
+        Bukkit.broadcastMessage("§d§l2");
+        nextAnimation.start(location);
+        Bukkit.broadcastMessage("§d§l3");
     }
 
     @Override

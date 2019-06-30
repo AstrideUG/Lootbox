@@ -1,23 +1,20 @@
 package de.piinguiin.lootbox.api.locationable;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public class AbstractLocationable implements Locationable {
 
-    @Nullable
-    protected Location currentLocation;
+    protected @NotNull Location currentLocation;
 
-    public AbstractLocationable(@Nullable final Location startLocation) {
+    public AbstractLocationable(@NotNull final Location startLocation) {
         this.currentLocation = startLocation;
-    }
-
-    public AbstractLocationable() {
-        this(null);
+        Bukkit.broadcastMessage("§6§lConstuctor of AbstractLocationable was called with currentLocation = " + currentLocation);
     }
 
     @Override
-    public final @Nullable Location getCurrentLocation() {
+    public final @NotNull Location getCurrentLocation() {
         return currentLocation;
     }
 

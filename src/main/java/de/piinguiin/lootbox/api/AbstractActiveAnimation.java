@@ -5,6 +5,8 @@ import de.piinguiin.lootbox.api.locationable.AbstractLocationable;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractActiveAnimation extends AbstractLocationable implements ActiveAnimation {
 
@@ -15,21 +17,26 @@ public abstract class AbstractActiveAnimation extends AbstractLocationable imple
     protected boolean finished;
 
     public AbstractActiveAnimation(final int ticks) {
-        super(null);
+        this(null, ticks);
+    }
+
+    public AbstractActiveAnimation(@Nullable final Location startLocation, final int ticks) {
+        super(startLocation);
         this.ticks = ticks;
     }
 
     @Override
-    public void start(final Location location) {
+    public void start(@NotNull final Location location) {
         currentLocation = location;
-        Bukkit.broadcastMessage("Started " + getClass().getSimpleName() + " with location " + location);
+        Bukkit.broadcastMessage("§5Started " + getClass() + " with location " + location);
 
         taskId = new BukkitRunnable() {
             @Override
             public void run() {
+                Bukkit.broadcastMessage("§3§lTicks: " + ticks);
                 if (ticks > 0) {
                     tick();
-                    Bukkit.broadcastMessage("ticked " + getClass().getSimpleName() + " on location: " + currentLocation);
+                    Bukkit.broadcastMessage("§5§nticked " + AbstractActiveAnimation.this.getClass().getSimpleName() + " on location: " + currentLocation);
                     ticks--;
                 } else finish();
             }
@@ -38,7 +45,8 @@ public abstract class AbstractActiveAnimation extends AbstractLocationable imple
 
     @Override
     public void finish() {
-        Bukkit.broadcastMessage("finished " + getClass().getSimpleName() + " on location: " + currentLocation);
+        Bukkit.broadcastMessage("§9finished " + getClass().getSimpleName() + " on location: " + currentLocation);
+
         finished = true;
         Bukkit.getScheduler().cancelTask(taskId);
     }

@@ -1,20 +1,45 @@
 package de.piinguiin.lootbox.utils.particle;
 
+import de.piinguiin.lootbox.LootboxPlugin;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
+import org.bukkit.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParticleBuilder {
 
     private EnumParticle enumParticle;
+    private ParticleForm form;
     private float x, y, z;
     private float speed;
     private float offX, offY, offZ;
     private int amount;
+    private final World world;
+
+    private double circleRadius;
+
+    public ParticleBuilder(final Location location) {
+        this.speed = 0;
+        this.amount = 1;
+        this.world = location.getWorld();
+        setLocation(location);
+        this.offX = 0;
+        this.offY = 0;
+        this.offZ = 0;
+        this.circleRadius = 0.0;
+    }
 
     public ParticleBuilder setEnumParticle(final EnumParticle enumParticle) {
         this.enumParticle = enumParticle;
+        this.form = ParticleForm.DEFAULT;
+        return this;
+    }
+
+    public ParticleBuilder setForm(final ParticleForm form) {
+        this.form = form;
         return this;
     }
 
@@ -53,29 +78,82 @@ public class ParticleBuilder {
         return this;
     }
 
+    public ParticleBuilder setCircleRadius(final double circleRadius) {
+        this.circleRadius = circleRadius;
+        return this;
+    }
+
     public ParticleBuilder setAmount(final int amount) {
         this.amount = amount;
         return this;
     }
 
+    public ParticleBuilder setOffSet(final float... offXYZ) {
+
+        if (offXYZ.length != 3) {
+            LootboxPlugin.getPlugin().getLogger().warning("cannot set offSet. Float array lenght must be 3!");
+            return this;
+        }
+
+        this.offX = offXYZ[0];
+        this.offY = offXYZ[1];
+        this.offZ = offXYZ[2];
+        return this;
+    }
+
     public ParticleBuilder setLocation(final Location location) {
         this.x = (float) location.getX();
-        this.y = (float) location.getX();
-        this.z = (float) location.getX();
+        this.y = (float) location.getY();
+        this.z = (float) location.getZ();
         return this;
+    }
+
+    public Location getLocation() {
+        return new Location(this.world, x, y, z);
     }
 
     private PacketPlayOutWorldParticles build() {
         return new PacketPlayOutWorldParticles(enumParticle, true, x, y, z, offX, offY, offZ, speed, amount);
     }
 
-    public void play(final Player player) {
+    public void play() {
+        switch (form) {
 
-        ParticleUtils.sendPacketToPlayer(build(), player);
+            case CIRCLE:
+                final Location center = getLocation();
+                final double radius = this.circleRadius;
+                final List<Location> particleLocs = new ArrayList<>();
+                for (double r = 0.0D; r < 360.0D; r += 15.0D) {
+                    final double angle = r * Math.PI / 180.0D;
+                    final double x = center.getX() + radius * Math.cos(angle);
+                    final double z = center.getZ() + radius * Math.sin(angle);
+                    final Location loc = center.clone();
+                    loc.setX(x);
+                    loc.setZ(z);
+                    particleLocs.add(loc);
+                }
+
+                for (final Location locs : particleLocs) {
+                    ParticleUtils.sendPacketToAll(new PacketPlayOutWorldParticles(enumParticle, true,
+                            (float) locs.getX(), (float) locs.getY(), (float) locs.getZ(), offX, offY, offZ, speed, amount));
+                }
+
+                break;
+
+            case DEFAULT:
+            default:
+                ParticleUtils.sendPacketToAll(build());
+                break;
+
+        }
     }
 
-    public void playAll() {
-        ParticleUtils.sendPacketToAll(build());
+    public static enum ParticleForm {
+
+
+        DEFAULT,
+        CIRCLE
+
     }
 
 }

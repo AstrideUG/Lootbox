@@ -1,50 +1,61 @@
 package de.piinguiin.lootbox.animations.falling;
 
-import de.piinguiin.lootbox.LootboxPlugin;
 import de.piinguiin.lootbox.api.AbstractActiveAnimation;
+import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
+import net.minecraft.server.v1_8_R3.EnumParticle;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.util.Vector;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public final class DefaultFallingActiveAnimation extends AbstractActiveAnimation implements FallingActiveAnimation {
 
     private final Vector vector;
 
-    public DefaultFallingActiveAnimation(final int ticks, @Nullable final Location location) {
-        super(ticks);
+    public DefaultFallingActiveAnimation(@NotNull final Location location, final int ticks) {
+        super(location, ticks);
 
-        vector = new Vector(0, 0.2, 0);
+        vector = new Vector(0, 0.3, 0);
         final double hight = ticks * vector.getY();
 
-        this.currentLocation = location != null ? location.clone().add(0, hight, 0) : null;
+        this.currentLocation = location.clone().add(0, hight, 0);
+
     }
 
-    @SuppressWarnings("unused")
-    public DefaultFallingActiveAnimation(final int ticks) {
-        this(ticks, null);
+    @Override
+    public void start(@NotNull final Location location) {
+        super.start(currentLocation);
     }
 
     @Override
     public void tick() {
-        if (currentLocation != null)
-            if (isAirDownwards()) {
-                //TODO spawn particle
-                //    ParticleEffect.FLAME.display(currentLocation, 2000);
-                currentLocation.subtract(vector); //TODO configure substraction vector
-            } else finish();
-        else {
-            LootboxPlugin.getPlugin().getLogger().warning("can't spawn particle to location `null`");
-            finish();
-        }
+        if (isAirDownwards()) {
+
+            new ParticleBuilder(currentLocation)
+                    .setEnumParticle(EnumParticle.CLOUD)
+                    .setAmount(5)
+                    .setSpeed(0)
+                    .play();
+
+            currentLocation.subtract(vector); //TODO configure substraction vector
+        } else finish();
     }
 
     /**
      * @throws NullPointerException if currentLocation is null
      */
     private boolean isAirDownwards() throws NullPointerException {
-        return currentLocation.getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR);
+        final Material type = currentLocation.getBlock().getRelative(BlockFace.DOWN).getType();
+        Bukkit.broadcastMessage("§b§lType: " + type);
+        return type.equals(Material.AIR);
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        Thread.dumpStack();
+
+    }
 }

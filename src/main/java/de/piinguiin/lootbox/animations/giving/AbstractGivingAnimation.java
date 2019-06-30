@@ -7,7 +7,6 @@ import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class AbstractGivingAnimation extends AbstractLocationable implements GivingAnimation {
 
@@ -15,21 +14,17 @@ public class AbstractGivingAnimation extends AbstractLocationable implements Giv
     private final ItemStack itemStack;
 
     @SuppressWarnings("WeakerAccess")
-    public AbstractGivingAnimation(@Nullable final Location startLocation, @NotNull final Entity target, @NotNull final ItemStack itemStack) {
+    public AbstractGivingAnimation(@NotNull final Location startLocation, @NotNull final Entity target, @NotNull final ItemStack itemStack) {
         super(startLocation);
         this.target = target;
         this.itemStack = itemStack;
-    }
-
-    public AbstractGivingAnimation(final Entity target, final ItemStack itemStack) {
-        this(null, target, itemStack);
     }
 
     /**
      * @throws IllegalStateException if {@code location.getWorld()} != {@code target.getLocation().getWorld()}
      */
     @Override
-    public void start(final Location location) throws IllegalStateException {
+    public void start(@NotNull final Location location) throws IllegalStateException {
         final Item item = location.getWorld().dropItem(location, this.itemStack);
         item.setPickupDelay(Integer.MAX_VALUE);
         final Location targetLocation = target.getLocation();

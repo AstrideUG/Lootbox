@@ -17,13 +17,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 public class PlayerInteractAtHead extends Listener {
 
-    private final LootboxPlugin plugin;
-
     public PlayerInteractAtHead(final LootboxPlugin plugin) {
         super(plugin, plugin.getServer().getPluginManager(), "");
-        this.plugin = plugin;
     }
-
 
     @EventHandler
     public static void test(final PlayerInteractEvent event) {
@@ -41,7 +37,7 @@ public class PlayerInteractAtHead extends Listener {
             player.sendMessage("staaaaaaaaaaaaaaart");
             final MoonCombinedActiveAnimation moonCombinedActiveAnimation = new MoonCombinedActiveAnimation(block.getLocation(), player);
             Bukkit.broadcastMessage(moonCombinedActiveAnimation.toString());
-            moonCombinedActiveAnimation.start(block.getLocation());
+            moonCombinedActiveAnimation.start(block.getLocation().clone().add(0.5, 0, 0.5));
         }
 
     }

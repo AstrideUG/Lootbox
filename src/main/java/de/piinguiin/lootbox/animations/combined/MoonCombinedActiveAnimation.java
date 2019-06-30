@@ -8,17 +8,19 @@ import de.piinguiin.lootbox.api.combined.AbstractCombinedActiveAnimation;
 import de.piinguiin.lootbox.factories.ItemFactory;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public final class MoonCombinedActiveAnimation extends AbstractCombinedActiveAnimation {
 
-    public MoonCombinedActiveAnimation(final Location startLocation, final Entity target) {
+    public MoonCombinedActiveAnimation(@NotNull final Location startLocation, final Entity target) {
         super(Arrays.asList(
-                new DefaultFallingActiveAnimation(10, startLocation),
-                new DefaultExplosionAnimation(),
-                new DefaultHeadSpinActiveAnimation(ItemFactory.getAnimationHead("moon")),
-                new DefaultGivingActiveAnimation(target, ItemFactory.getAnimationHead("moon"))
+                new DefaultFallingActiveAnimation(startLocation, 100),
+                new DefaultExplosionAnimation(startLocation),
+                new DefaultHeadSpinActiveAnimation(startLocation, Objects.requireNonNull(ItemFactory.getAnimationHead("moon"))),
+                new DefaultGivingActiveAnimation(startLocation, target, Objects.requireNonNull(ItemFactory.getAnimationHead("moon")))
         ));
     }
 
