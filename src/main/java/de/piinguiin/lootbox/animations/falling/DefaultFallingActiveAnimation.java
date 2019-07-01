@@ -13,8 +13,8 @@ public final class DefaultFallingActiveAnimation extends AbstractActiveAnimation
 
     private final Vector vector;
 
-    public DefaultFallingActiveAnimation(@NotNull final Location location, final int ticks) {
-        super(location, ticks);
+    public DefaultFallingActiveAnimation(@NotNull final Location location, final int ticks, final int period) {
+        super(location, ticks, period);
 
         vector = new Vector(0, 0.3, 0);
         final double hight = ticks * vector.getY();

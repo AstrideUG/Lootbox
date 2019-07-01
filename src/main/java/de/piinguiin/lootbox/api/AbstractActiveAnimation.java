@@ -10,18 +10,19 @@ import org.jetbrains.annotations.Nullable;
 public abstract class AbstractActiveAnimation extends AbstractLocationable implements ActiveAnimation {
 
     @SuppressWarnings("WeakerAccess")
-    protected int ticks;
+    protected int ticks, period;
     private int taskId;
     @SuppressWarnings("WeakerAccess")
     protected boolean finished;
 
-    public AbstractActiveAnimation(final int ticks) {
-        this(null, ticks);
+    public AbstractActiveAnimation(final int ticks, final int period) {
+        this(null, ticks, period);
     }
 
-    public AbstractActiveAnimation(@Nullable final Location startLocation, final int ticks) {
+    public AbstractActiveAnimation(@Nullable final Location startLocation, final int ticks, final int period) {
         super(startLocation);
         this.ticks = ticks;
+        this.period = period;
     }
 
     @Override
@@ -39,7 +40,7 @@ public abstract class AbstractActiveAnimation extends AbstractLocationable imple
                     ticks--;
                 } else finish();
             }
-        }.runTaskTimer(LootboxPlugin.getPlugin(), 0, 2).getTaskId();
+        }.runTaskTimer(LootboxPlugin.getPlugin(), 0, period).getTaskId();
     }
 
     @Override

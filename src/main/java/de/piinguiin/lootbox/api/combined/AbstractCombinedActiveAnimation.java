@@ -15,7 +15,7 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
     private int currentAnimationPosition;
 
     public AbstractCombinedActiveAnimation(final List<Animation> animations) {
-        super(Integer.MAX_VALUE);
+        super(Integer.MAX_VALUE, 2);
         this.animations = animations;
         this.currentAnimationPosition = -1;
         //    Bukkit.broadcastMessage("init " + getClass().getSimpleName() + " with " + toString());

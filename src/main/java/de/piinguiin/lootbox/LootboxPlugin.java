@@ -3,6 +3,10 @@ package de.piinguiin.lootbox;
 import de.piinguiin.lootbox.animations.events.PlayerInteractAtHead;
 import de.piinguiin.lootbox.io.FileManager;
 import de.piinguiin.lootbox.types.LootboxManager;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class LootboxPlugin extends JavaPlugin {
@@ -23,6 +27,16 @@ public class LootboxPlugin extends JavaPlugin {
         lootboxManager = new LootboxManager();
         new PlayerInteractAtHead(this);
         log("finished initialization. ");
+    }
+
+    @Override
+    public void onDisable() {
+        final World world = Bukkit.getWorld("world");
+        for (final Entity ents : world.getEntities()) {
+            if (ents instanceof ArmorStand) {
+                ents.remove();
+            }
+        }
     }
 
     public static LootboxPlugin getPlugin() {
