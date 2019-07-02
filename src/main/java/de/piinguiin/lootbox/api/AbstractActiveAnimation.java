@@ -2,6 +2,7 @@ package de.piinguiin.lootbox.api;
 
 import de.piinguiin.lootbox.LootboxPlugin;
 import de.piinguiin.lootbox.api.locationable.AbstractLocationable;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +49,7 @@ public abstract class AbstractActiveAnimation extends AbstractLocationable imple
         //   Bukkit.broadcastMessage("§9finished " + getClass().getSimpleName() + " on location: " + currentLocation);
 
         finished = true;
-        //  Bukkit.getScheduler().cancelTask(taskId);
+        Bukkit.getScheduler().cancelTask(taskId);
     }
 
     @Override

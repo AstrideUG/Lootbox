@@ -1,17 +1,18 @@
 package de.piinguiin.lootbox.types;
 
 import de.piinguiin.lootbox.api.Lootbox;
+import de.piinguiin.lootbox.api.combined.CombinedActiveAnimation;
 import de.piinguiin.lootbox.factories.LootboxFactory;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class LootboxManager {
 
     private final Map<String, Lootbox> lootboxes;
-    private final Map<Player, Lootbox> runningLootboxOpening;
+    private final Map<UUID, CombinedActiveAnimation> runningLootboxOpening;
 
     public LootboxManager() {
         this.lootboxes = new HashMap<>();
@@ -40,7 +41,7 @@ public class LootboxManager {
         return this.lootboxes.getOrDefault(id, null);
     }
 
-    public Map<Player, Lootbox> getRunningLootboxOpening() {
+    public Map<UUID, CombinedActiveAnimation> getRunningLootboxOpening() {
         return runningLootboxOpening;
     }
 }

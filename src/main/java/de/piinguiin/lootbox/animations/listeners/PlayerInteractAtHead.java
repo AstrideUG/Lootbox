@@ -1,14 +1,15 @@
-package de.piinguiin.lootbox.animations.events;
+package de.piinguiin.lootbox.animations.listeners;
 
 import de.piinguiin.lootbox.LootboxPlugin;
 import de.piinguiin.lootbox.animations.combined.MoonCombinedActiveAnimation;
 import de.piinguiin.lootbox.animations.headspin.HeadSpinActiveAnimation;
 import de.piinguiin.lootbox.api.Animation;
-import de.piinguiin.lootbox.api.Lootbox;
 import de.piinguiin.lootbox.api.combined.CombinedActiveAnimation;
+import de.piinguiin.lootbox.types.LootboxManager;
 import net.darkdevelopers.darkbedrock.darkness.spigot.listener.Listener;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
@@ -31,10 +32,17 @@ public class PlayerInteractAtHead extends Listener {
             return;
         }
 
+        if (LootboxPlugin.getLootboxManager().getRunningLootboxOpening().containsKey(player.getUniqueId())) {
+            player.sendMessage("allready running");
+            return;
+        }
+
         if (block.getType().equals(Material.REDSTONE_BLOCK)) {
             event.setCancelled(true);
             final MoonCombinedActiveAnimation moonCombinedActiveAnimation = new MoonCombinedActiveAnimation(block.getLocation(), player);
             moonCombinedActiveAnimation.start(block.getLocation().clone().add(0.5, 0, 0.5));
+            final LootboxManager lootboxManager = LootboxPlugin.getLootboxManager();
+            lootboxManager.getRunningLootboxOpening().put(player.getUniqueId(), moonCombinedActiveAnimation);
         }
 
     }
@@ -43,15 +51,21 @@ public class PlayerInteractAtHead extends Listener {
     public static void onInteractAtEntity(final PlayerInteractAtEntityEvent event) {
         final Player player = event.getPlayer();
 
-        final Lootbox lootbox = LootboxPlugin.getLootboxManager().getRunningLootboxOpening().get(player);
-        final CombinedActiveAnimation combinedActiveAnimation = lootbox.getCombinedActiveAnimation();
+
+        if (!(event.getRightClicked() instanceof ArmorStand)) {
+            player.sendMessage("leider kein armorstand. Kuh oder so...");
+            return;
+        }
+
+
+        final CombinedActiveAnimation combinedActiveAnimation = LootboxPlugin.getLootboxManager().getRunningLootboxOpening().get(player.getUniqueId());
         final Animation animation = combinedActiveAnimation.getAnimations().get(combinedActiveAnimation.getCurrentAnimationPosition());
 
         if (!(animation instanceof HeadSpinActiveAnimation)) {
             return;
         }
 
-        player.sendMessage("is headspin animation");
+        event.setCancelled(true);
         ((HeadSpinActiveAnimation) animation).finish();
     }
 

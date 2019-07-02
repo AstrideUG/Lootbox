@@ -6,7 +6,6 @@ import de.piinguiin.lootbox.api.headable.HeadableUtils;
 import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
 import de.piinguiin.lootbox.utils.particle.colorable.ColoredParticle;
 import net.minecraft.server.v1_8_R3.EnumParticle;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.ItemStack;
@@ -23,8 +22,9 @@ public class DefaultHeadSpinActiveAnimation extends AbstractActiveAnimation impl
     private final float radius = 0.7F;
     int i = 0;
 
-    public DefaultHeadSpinActiveAnimation(@NotNull final Location location, @NotNull final ItemStack head, final int period) {
-        super(location, Integer.MAX_VALUE, period);
+    public DefaultHeadSpinActiveAnimation(@NotNull final Location location, @NotNull final ItemStack head,
+                                          final int ticks, final int period) {
+        super(location, ticks, period);
         this.head = head;
     }
 
@@ -32,7 +32,6 @@ public class DefaultHeadSpinActiveAnimation extends AbstractActiveAnimation impl
     public void start(@NotNull final Location location) {
         super.start(location);
         armorStand = HeadableUtils.spawnArmorStand(location.clone().add(0.5, 0, 0.5), head);
-
     }
 
     @Override
@@ -57,15 +56,16 @@ public class DefaultHeadSpinActiveAnimation extends AbstractActiveAnimation impl
 
             i++;
             final double angle = 6.283185307179586D * (double) this.i / 50.0D;
-            final double x = Math.cos(angle) * 0.699999988079071D;
-            final double z = Math.sin(angle) * 0.699999988079071D;
+            final double x = Math.cos(angle) * 0.7D;
+            final double z = Math.sin(angle) * 0.7D;
 
             particleLocA.add(x, 0, z);
             particleLocB.add(-x, 0, -z);
 
-            new ParticleBuilder(particleLocA).setEnumParticle(EnumParticle.SPELL_MOB).play();
-            // new ParticleBuilder(particleLocB).setOffSet(0.255F, 0.2F, 0.2F).setEnumParticle(EnumParticle.REDSTONE).play();
-            ColoredParticle.RED_DUST.send(particleLocB, 100, 0, 255, 0);
+            //new ParticleBuilder(particleLocA).setEnumParticle(EnumParticle.FIREWORKS_SPARK).play();
+            // new ParticleBuilder(particleLocB).setEnumParticle(EnumParticle.FIREWORKS_SPARK).play();
+            ColoredParticle.RED_DUST.send(particleLocB, 100, 255, 255, 255);
+            ColoredParticle.RED_DUST.send(particleLocA, 100, 255, 255, 255);
 
             particleLocA.subtract(x, 0, z);
             particleLocB.subtract(-x, 0, -z);
@@ -81,11 +81,10 @@ public class DefaultHeadSpinActiveAnimation extends AbstractActiveAnimation impl
     @Override
     public void finish() {
         super.finish();
-        Bukkit.broadcastMessage("finish headspin");
         new ParticleBuilder(armorStand.getEyeLocation())
-                .setEnumParticle(EnumParticle.SUSPENDED)
-                .setAmount(5)
-                .setSpeed(0)
+                .setEnumParticle(EnumParticle.FLAME)
+                .setAmount(10)
+                .setSpeed(1)
                 .setOffSet(0.1F, 0.1F, 0.1F)
                 .play();
         armorStand.remove();

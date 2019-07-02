@@ -5,6 +5,7 @@ import de.piinguiin.lootbox.api.ActiveAnimation;
 import de.piinguiin.lootbox.api.Animation;
 import de.piinguiin.lootbox.api.startable.Startable;
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -13,13 +14,13 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
 
     private final List<Animation> animations;
     private int currentAnimationPosition;
+    private final @NotNull Entity target;
 
-    public AbstractCombinedActiveAnimation(final List<Animation> animations) {
+    public AbstractCombinedActiveAnimation(final List<Animation> animations, @NotNull final Entity target) {
         super(Integer.MAX_VALUE, 2);
         this.animations = animations;
         this.currentAnimationPosition = -1;
-        //    Bukkit.broadcastMessage("init " + getClass().getSimpleName() + " with " + toString());
-
+        this.target = target;
     }
 
     @Override
@@ -31,27 +32,31 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
     @Override
     public final void tick() {
 
-        if (currentAnimationPosition < animations.size()) {
+        if (currentAnimationPosition < animations.size() - 1) {
             final Animation currentAnimation = animations.get(currentAnimationPosition);
             currentLocation = currentAnimation.getCurrentLocation();
-            //    Bukkit.broadcastMessage("bbb");
+
             if (currentAnimation instanceof ActiveAnimation) {
-                //       Bukkit.broadcastMessage("ccc");
+
                 if (((ActiveAnimation) currentAnimation).isFinished()) {
                     startNext(currentLocation);
-                    //             Bukkit.broadcastMessage("ddd1");
-                } //else Bukkit.broadcastMessage("ddd2");
+                }
             } else {
-                // Bukkit.broadcastMessage("eee");
+
                 startNext(currentLocation);
             }
         } else finish();
-        // Bukkit.broadcastMessage("fff");
+
     }
 
     @Override
     public List<Animation> getAnimations() {
         return animations;
+    }
+
+    @Override
+    public @NotNull Entity getTarget() {
+        return target;
     }
 
     @Override
@@ -62,15 +67,9 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
     private void startNext(@NotNull final Location location) {
         if (location == null) throw new IllegalArgumentException("location for startNext can not be null");
 
-
         this.currentAnimationPosition++;
-        //    Bukkit.broadcastMessage("§d§l1");
-
         final Startable nextAnimation = animations.get(currentAnimationPosition);
-        //    Bukkit.broadcastMessage("§enextAnimation for " + getClass().getSimpleName() + " is " + nextAnimation);
-        //     Bukkit.broadcastMessage("§d§l2");
         nextAnimation.start(location);
-        //   Bukkit.broadcastMessage("§d§l3");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package de.piinguiin.lootbox;
 
-import de.piinguiin.lootbox.animations.events.PlayerInteractAtHead;
+import de.piinguiin.lootbox.animations.listeners.CombinedActiveAnmiationFinish;
+import de.piinguiin.lootbox.animations.listeners.PlayerInteractAtHead;
 import de.piinguiin.lootbox.io.FileManager;
 import de.piinguiin.lootbox.types.LootboxManager;
 import org.bukkit.Bukkit;
@@ -26,14 +27,21 @@ public class LootboxPlugin extends JavaPlugin {
         fileManager = new FileManager();
         lootboxManager = new LootboxManager();
         new PlayerInteractAtHead(this);
+        new CombinedActiveAnmiationFinish(this);
         log("finished initialization. ");
     }
+
 
     @Override
     public void onDisable() {
         final World world = Bukkit.getWorld("world");
         for (final Entity ents : world.getEntities()) {
             if (ents instanceof ArmorStand) {
+
+                if (ents.getPassenger() != null) {
+                    ents.getPassenger().remove();
+                }
+
                 ents.remove();
             }
         }
