@@ -4,6 +4,7 @@ import de.piinguiin.lootbox.api.AbstractActiveAnimation;
 import de.piinguiin.lootbox.api.headable.Headable;
 import de.piinguiin.lootbox.api.headable.HeadableUtils;
 import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
+import de.piinguiin.lootbox.utils.particle.colorable.ColoredParticle;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -17,7 +18,10 @@ public class DefaultHeadSpinActiveAnimation extends AbstractActiveAnimation impl
     private final ItemStack head;
     private ArmorStand armorStand;
     private double y = 0.0;
-    private int particleTick = 0;
+    //private int particleTick = 0;
+    private Location particleLocA, particleLocB;
+    private final float radius = 0.7F;
+    int i = 0;
 
     public DefaultHeadSpinActiveAnimation(@NotNull final Location location, @NotNull final ItemStack head, final int period) {
         super(location, Integer.MAX_VALUE, period);
@@ -34,7 +38,7 @@ public class DefaultHeadSpinActiveAnimation extends AbstractActiveAnimation impl
     @Override
     public void tick() {
         if (armorStand != null) {
-
+/*
             if (particleTick == 10) {
                 new ParticleBuilder(armorStand.getEyeLocation())
                         .setEnumParticle(EnumParticle.LAVA)
@@ -46,6 +50,27 @@ public class DefaultHeadSpinActiveAnimation extends AbstractActiveAnimation impl
                 particleTick++;
 
             }
+            */
+
+            particleLocA = armorStand.getEyeLocation().clone();
+            particleLocB = armorStand.getEyeLocation().clone();
+
+            i++;
+            final double angle = 6.283185307179586D * (double) this.i / 50.0D;
+            final double x = Math.cos(angle) * 0.699999988079071D;
+            final double z = Math.sin(angle) * 0.699999988079071D;
+
+            particleLocA.add(x, 0, z);
+            particleLocB.add(-x, 0, -z);
+
+            new ParticleBuilder(particleLocA).setEnumParticle(EnumParticle.SPELL_MOB).play();
+            // new ParticleBuilder(particleLocB).setOffSet(0.255F, 0.2F, 0.2F).setEnumParticle(EnumParticle.REDSTONE).play();
+            ColoredParticle.RED_DUST.send(particleLocB, 100, 0, 255, 0);
+
+            particleLocA.subtract(x, 0, z);
+            particleLocB.subtract(-x, 0, -z);
+
+
             armorStand.setHeadPose(new EulerAngle(0.0, y, 0.0));
             y += 0.025;
 

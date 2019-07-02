@@ -3,6 +3,7 @@ package de.piinguiin.lootbox.utils.particle;
 import de.piinguiin.lootbox.LootboxPlugin;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.World;
 
@@ -84,6 +85,13 @@ public class ParticleBuilder {
         return this;
     }
 
+    public ParticleBuilder setColor(final Color color) {
+        this.offX = color.getRed();
+        this.offY = color.getGreen();
+        this.offZ = color.getBlue();
+        return this;
+    }
+
     public ParticleBuilder setAmount(final int amount) {
         this.amount = amount;
         return this;
@@ -114,7 +122,7 @@ public class ParticleBuilder {
     }
 
     private PacketPlayOutWorldParticles build() {
-        return new PacketPlayOutWorldParticles(enumParticle, true, x, y, z, offX, offY, offZ, speed, amount);
+        return new PacketPlayOutWorldParticles(enumParticle, true, x, y, z, offX, offY, offZ, speed, amount, null);
     }
 
     public void play() {
