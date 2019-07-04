@@ -55,7 +55,14 @@ public abstract class AbstractGivingActiveAnimation extends AbstractActiveAnimat
 
     @Override
     public void finish() {
-        base.getPassenger().remove();
+
+        if (base == null) {
+            return;
+        }
+
+        if (base.getPassenger() != null) {
+            base.getPassenger().remove();
+        }
         base.remove();
     }
 }

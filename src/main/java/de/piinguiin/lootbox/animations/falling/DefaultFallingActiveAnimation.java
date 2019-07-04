@@ -1,8 +1,6 @@
 package de.piinguiin.lootbox.animations.falling;
 
 import de.piinguiin.lootbox.api.AbstractActiveAnimation;
-import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
-import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -12,15 +10,21 @@ import org.jetbrains.annotations.NotNull;
 public final class DefaultFallingActiveAnimation extends AbstractActiveAnimation implements FallingActiveAnimation {
 
     private final Vector vector;
+    //private final HelixAnimation helixAnimation;
+    //private final SpiralAnimation spiralAnimation;
 
     public DefaultFallingActiveAnimation(@NotNull final Location location, final int ticks, final int period) {
         super(location, ticks, period);
 
         vector = new Vector(0, 0.3, 0);
-        final double hight = ticks * vector.getY();
+        final double height = ticks * vector.getY();
+        this.currentLocation = location.clone().add(0.5, height, 0.5);
+        /*
+        this.helixAnimation = new HelixAnimation(location, height, 0.3, 0.7, EnumParticle.CRIT);
+        this.spiralAnimation = new SpiralAnimation(location.clone().add(0.5, 0, 0.5), EnumParticle.FLAME,
+                0.3, 6.2, 0.5, 3, 10, SpiralAnimation.Dircetion.DOWN);
 
-        this.currentLocation = location.clone().add(0.5, hight, 0.5);
-
+         */
     }
 
     @Override
@@ -32,23 +36,17 @@ public final class DefaultFallingActiveAnimation extends AbstractActiveAnimation
     public void tick() {
         if (isAirDownwards()) {
 
-            new ParticleBuilder(currentLocation)
-                    .setEnumParticle(EnumParticle.CLOUD)
-                    .setAmount(2)
-                    .setSpeed(0)
-                    .play();
+            //new ParticleBuilder(currentLocation).setEnumParticle(EnumParticle.CLOUD).setAmount(2).play();
 
+            // this.helixAnimation.onUpdate();
+            //this.spiralAnimation.onUpdate();
 
-            currentLocation.subtract(vector); //TODO configure substraction vector
+            currentLocation.subtract(vector);
         } else finish();
     }
 
-    /**
-     * @throws NullPointerException if currentLocation is null
-     */
     private boolean isAirDownwards() throws NullPointerException {
         final Material type = currentLocation.getBlock().getRelative(BlockFace.DOWN).getType();
-        // Bukkit.broadcastMessage("§b§lType: " + type);
         return type.equals(Material.AIR);
     }
 

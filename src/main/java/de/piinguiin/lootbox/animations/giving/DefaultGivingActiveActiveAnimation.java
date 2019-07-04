@@ -9,13 +9,17 @@ import org.jetbrains.annotations.NotNull;
 
 public class DefaultGivingActiveActiveAnimation extends AbstractGivingActiveAnimation {
 
+    private final TTEESSTT test;
+
     public DefaultGivingActiveActiveAnimation(@NotNull final Location startLocation, final int ticks, @NotNull final Entity target, @NotNull final ItemStack itemStack) {
         super(startLocation, ticks, target, itemStack);
+        this.test = new TTEESSTT();
     }
 
     @Override
     public void tick() {
         new ParticleBuilder(base.getEyeLocation().clone().add(0, 0.2, 0)).setOffSet(0.3F, 0.3F, 0.3F)
                 .setEnumParticle(EnumParticle.HEART).play();
+        test.onUpdate(getTarget());
     }
 }

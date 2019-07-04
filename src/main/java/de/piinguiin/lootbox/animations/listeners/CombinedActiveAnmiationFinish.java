@@ -19,7 +19,7 @@ public class CombinedActiveAnmiationFinish extends Listener {
 
         final UUID uniqueId = event.getCombinedActiveAnimation().getTarget().getUniqueId();
         final LootboxManager lootboxManager = LootboxPlugin.getLootboxManager();
-        lootboxManager.getRunningLootboxOpening().remove(uniqueId);
+        lootboxManager.getRunningCombinedAnimations().remove(uniqueId);
 
     }
 

@@ -32,7 +32,7 @@ public class PlayerInteractAtHead extends Listener {
             return;
         }
 
-        if (LootboxPlugin.getLootboxManager().getRunningLootboxOpening().containsKey(player.getUniqueId())) {
+        if (LootboxPlugin.getLootboxManager().getRunningCombinedAnimations().containsKey(player.getUniqueId())) {
             player.sendMessage("allready running");
             return;
         }
@@ -42,7 +42,7 @@ public class PlayerInteractAtHead extends Listener {
             final MoonCombinedActiveAnimation moonCombinedActiveAnimation = new MoonCombinedActiveAnimation(block.getLocation(), player);
             moonCombinedActiveAnimation.start(block.getLocation().clone().add(0.5, 0, 0.5));
             final LootboxManager lootboxManager = LootboxPlugin.getLootboxManager();
-            lootboxManager.getRunningLootboxOpening().put(player.getUniqueId(), moonCombinedActiveAnimation);
+            lootboxManager.getRunningCombinedAnimations().put(player.getUniqueId(), moonCombinedActiveAnimation);
         }
 
     }
@@ -58,7 +58,7 @@ public class PlayerInteractAtHead extends Listener {
         }
 
 
-        final CombinedActiveAnimation combinedActiveAnimation = LootboxPlugin.getLootboxManager().getRunningLootboxOpening().get(player.getUniqueId());
+        final CombinedActiveAnimation combinedActiveAnimation = LootboxPlugin.getLootboxManager().getRunningCombinedAnimations().get(player.getUniqueId());
         final Animation animation = combinedActiveAnimation.getAnimations().get(combinedActiveAnimation.getCurrentAnimationPosition());
 
         if (!(animation instanceof HeadSpinActiveAnimation)) {

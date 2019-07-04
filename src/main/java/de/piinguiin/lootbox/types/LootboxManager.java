@@ -12,11 +12,11 @@ import java.util.UUID;
 public class LootboxManager {
 
     private final Map<String, Lootbox> lootboxes;
-    private final Map<UUID, CombinedActiveAnimation> runningLootboxOpening;
+    private final Map<UUID, CombinedActiveAnimation> runningCombinedAnimations;
 
     public LootboxManager() {
         this.lootboxes = new HashMap<>();
-        this.runningLootboxOpening = new HashMap<>();
+        this.runningCombinedAnimations = new HashMap<>();
         loadLootboxes();
     }
 
@@ -41,7 +41,7 @@ public class LootboxManager {
         return this.lootboxes.getOrDefault(id, null);
     }
 
-    public Map<UUID, CombinedActiveAnimation> getRunningLootboxOpening() {
-        return runningLootboxOpening;
+    public Map<UUID, CombinedActiveAnimation> getRunningCombinedAnimations() {
+        return runningCombinedAnimations;
     }
 }
