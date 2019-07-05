@@ -24,10 +24,12 @@ public final class MoonCombinedActiveAnimation extends AbstractCombinedActiveAni
 
     public MoonCombinedActiveAnimation(@NotNull final Location startLocation, final Entity target) {
         super(Arrays.asList( // 75
-                new DefaultFallingActiveAnimation(startLocation, 50, 2),
+
+                new DefaultFallingActiveAnimation(startLocation, 20, 2),
                 new DefaultExplosionAnimation(startLocation),
                 new DefaultHeadSpinActiveAnimation(startLocation, Objects.requireNonNull(ItemFactory.getAnimationHead("moon")), 200, 1),
-                new DefaultGivingActiveActiveAnimation(startLocation, 40, target, new ItemCreator().material(Material.DOUBLE_PLANT).displayName("§6§lwin").build())), target);
+                new DefaultGivingActiveActiveAnimation(startLocation, 100, target, new ItemCreator().material(Material.DOUBLE_PLANT).displayName("§6§lwin").build())),
+                target);
         this.target = target;
     }
 

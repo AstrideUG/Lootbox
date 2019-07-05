@@ -17,7 +17,7 @@ public abstract class AbstractGivingActiveAnimation extends AbstractActiveAnimat
 
     @SuppressWarnings("WeakerAccess")
     public AbstractGivingActiveAnimation(@NotNull final Location startLocation, final int ticks, @NotNull final Entity target, @NotNull final ItemStack itemStack) {
-        super(startLocation, ticks, 5);
+        super(startLocation, ticks, 2);
         this.target = target;
         this.itemStack = itemStack;
     }
