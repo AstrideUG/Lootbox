@@ -1,6 +1,6 @@
 package de.piinguiin.lootbox.animations.headspin;
 
-import de.piinguiin.lootbox.animations.particle.RainbowDoubleCircleAnimation;
+import de.piinguiin.lootbox.animations.particle.ColoredDoubleCircleAnimation;
 import de.piinguiin.lootbox.api.AbstractActiveAnimation;
 import de.piinguiin.lootbox.api.headable.Headable;
 import de.piinguiin.lootbox.api.headable.HeadableUtils;
@@ -17,7 +17,7 @@ public class DefaultHeadSpinActiveAnimation extends AbstractActiveAnimation impl
     private final ItemStack head;
     private ArmorStand armorStand;
     private double y = 0.0;
-    private RainbowDoubleCircleAnimation circle;
+    private ColoredDoubleCircleAnimation circle;
 
     public DefaultHeadSpinActiveAnimation(@NotNull final Location location, @NotNull final ItemStack head,
                                           final int ticks, final int period) {
@@ -29,7 +29,7 @@ public class DefaultHeadSpinActiveAnimation extends AbstractActiveAnimation impl
     public void start(@NotNull final Location location) {
         super.start(location);
         armorStand = HeadableUtils.spawnArmorStand(location.clone().add(0.5, 0, 0.5), head);
-        circle = new RainbowDoubleCircleAnimation(armorStand.getEyeLocation(), 0.7);
+        circle = new ColoredDoubleCircleAnimation(0.7, 255, 255, 255, armorStand.getEyeLocation());
     }
 
     @Override
@@ -46,9 +46,9 @@ public class DefaultHeadSpinActiveAnimation extends AbstractActiveAnimation impl
     @Override
     public void finish() {
         super.finish();
-        new ParticleBuilder(armorStand.getEyeLocation()).setEnumParticle(EnumParticle.FLAME).setAmount(10)
+        new ParticleBuilder(armorStand.getEyeLocation()).setEnumParticle(EnumParticle.FLAME).setAmount(50)
                 .setSpeed(1)
-                .setOffSet(0.1F, 0.1F, 0.1F)
+                .setOffSet(0.15F, 0.15F, 0.15F)
                 .play();
         armorStand.remove();
     }

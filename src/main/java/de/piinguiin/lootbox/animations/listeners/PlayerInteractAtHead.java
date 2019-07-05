@@ -37,7 +37,7 @@ public class PlayerInteractAtHead extends Listener {
             return;
         }
 
-        if (block.getType().equals(Material.REDSTONE_BLOCK)) {
+        if (block.getType().equals(Material.COBBLE_WALL)) {
             event.setCancelled(true);
             final MoonCombinedActiveAnimation moonCombinedActiveAnimation = new MoonCombinedActiveAnimation(block.getLocation(), player);
             moonCombinedActiveAnimation.start(block.getLocation().clone().add(0.5, 0, 0.5));
