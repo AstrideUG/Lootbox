@@ -1,6 +1,7 @@
 package de.piinguiin.lootbox.animations.giving;
 
 import de.piinguiin.lootbox.animations.particle.CrossedBallAnimation;
+import de.piinguiin.lootbox.prizes.LootboxPrize;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -11,14 +12,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultGivingActiveActiveAnimation extends AbstractGivingActiveAnimation {
+public class MoonGivingAbstractActiveAnimation extends AbstractGivingActiveAnimation {
 
     private CrossedBallAnimation crossedBallAnimation;
     private final List<Item> droppedItems;
     private int dropTick;
 
-    public DefaultGivingActiveActiveAnimation(@NotNull final Location startLocation, final int ticks, @NotNull final Entity target, @NotNull final ItemStack itemStack) {
-        super(startLocation, ticks, target, itemStack);
+    public MoonGivingAbstractActiveAnimation(@NotNull final Location startLocation, final int ticks,
+                                             @NotNull final Entity target, @NotNull final LootboxPrize lootboxPrize) {
+        super(startLocation, ticks, target, lootboxPrize);
         this.droppedItems = new ArrayList<>();
         this.dropTick = 0;
     }
@@ -35,7 +37,7 @@ public class DefaultGivingActiveActiveAnimation extends AbstractGivingActiveAnim
         this.crossedBallAnimation.onUpdate();
 
         if (dropTick == 5) {
-            this.droppedItems.add(dropItem(itemStack));
+            this.droppedItems.add(dropItem(prize.getDisplayItem()));
             dropTick = 0;
         } else {
             dropTick++;

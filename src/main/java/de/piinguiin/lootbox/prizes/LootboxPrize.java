@@ -13,13 +13,15 @@ public class LootboxPrize {
     int amount;
     boolean money;
     int percent;
+    private final LootboxPrizeRarity rarity;
 
-    public LootboxPrize(final String displayName, final ItemStack item, final int amount, final boolean money, final int percent) {
+    public LootboxPrize(final String displayName, final ItemStack item, final int amount, final boolean money, final int percent, final LootboxPrizeRarity rarity) {
         this.displayName = displayName;
         this.item = item;
         this.amount = amount;
         this.money = money;
         this.percent = percent;
+        this.rarity = rarity;
     }
 
     public String getDisplayName() {
@@ -40,6 +42,10 @@ public class LootboxPrize {
 
     public int getPercent() {
         return percent;
+    }
+
+    public LootboxPrizeRarity getRarity() {
+        return rarity;
     }
 
     public void onWin(final Player player) {
@@ -65,4 +71,48 @@ public class LootboxPrize {
         item = new ItemCreator().material(this.item.getType()).displayName("§7§o" + amount + "x " + displayName).build();
         return item;
     }
+
+    public static enum LootboxPrizeRarity {
+
+        COMMON("Gewöhnlich", "gewöhnlichen", "§f"),
+        UNCOMMON("Ungewöhnlich", "ungewöhnlichen", "§8"),
+        RARE("Selten", "seltenen", "§9"),
+        EPIC("Episch", "epischen", "§5"),
+        LEGENDARY("Legendär", "legendären", "§6");
+
+        private final String name;
+        private final String adjective;
+        private final String getColor;
+
+        LootboxPrizeRarity(final String name, final String adjective, final String getColor) {
+            this.name = name;
+            this.adjective = adjective;
+            this.getColor = getColor;
+        }
+
+        public String getAdjective() {
+            return adjective;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getGetColor() {
+            return getColor;
+        }
+
+        public static LootboxPrizeRarity getByClassName(final String className) {
+
+            for (final LootboxPrizeRarity lootboxPrizeRarity : LootboxPrizeRarity.values()) {
+                if (lootboxPrizeRarity.name.equalsIgnoreCase(className)) {
+                    return lootboxPrizeRarity;
+                }
+            }
+            return null;
+
+        }
+
+    }
+
 }

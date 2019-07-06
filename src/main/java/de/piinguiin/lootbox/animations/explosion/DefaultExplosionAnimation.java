@@ -9,6 +9,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class DefaultExplosionAnimation extends AbstractLocationable implements ExplosionAnimation {
 
+    /**
+     * simple explosion with knockback
+     */
+
     public DefaultExplosionAnimation(@NotNull final Location startLocation) {
         super(startLocation);
     }
@@ -16,9 +20,7 @@ public class DefaultExplosionAnimation extends AbstractLocationable implements E
     @Override
     public void start(@NotNull final Location location) {
         new ParticleBuilder(currentLocation)
-                .setEnumParticle(EnumParticle.EXPLOSION_HUGE)
-                .setAmount(1)
-                .play();
+                .setEnumParticle(EnumParticle.EXPLOSION_HUGE).setAmount(1).play();
 
         for (final Entity near : location.getWorld().getNearbyEntities(currentLocation, 3, 3, 3)) {
             near.setVelocity(near.getLocation().getDirection().multiply(-1).setY(0.4));
