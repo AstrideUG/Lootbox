@@ -4,7 +4,7 @@ import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Location;
 
-public class HelixAnimation extends AnimatedParticleEffect {
+public class HelixParticleEffectAnimationAnimation extends ParticleEffectAnimation {
 
     private final double hight;
     private final double subtract;
@@ -13,8 +13,8 @@ public class HelixAnimation extends AnimatedParticleEffect {
     private int i;
     private final Location location;
 
-    public HelixAnimation(final Location location,
-                          final double hight, final double subtract, final double radius, final EnumParticle particle) {
+    public HelixParticleEffectAnimationAnimation(final Location location,
+                                                 final double hight, final double subtract, final double radius, final EnumParticle particle) {
         this.hight = hight;
         this.subtract = subtract;
         this.radius = radius;

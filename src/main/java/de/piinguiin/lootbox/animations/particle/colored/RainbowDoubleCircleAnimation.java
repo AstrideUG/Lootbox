@@ -1,10 +1,10 @@
 package de.piinguiin.lootbox.animations.particle.colored;
 
-import de.piinguiin.lootbox.animations.particle.AnimatedParticleEffect;
+import de.piinguiin.lootbox.animations.particle.ParticleEffectAnimation;
 import de.piinguiin.lootbox.utils.particle.colorable.ColoredParticle;
 import org.bukkit.Location;
 
-public class RainbowDoubleCircleAnimation extends AnimatedParticleEffect {
+public class RainbowDoubleCircleAnimation extends ParticleEffectAnimation {
 
     private final double radius;
     private int i;

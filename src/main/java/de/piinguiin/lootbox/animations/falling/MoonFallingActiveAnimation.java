@@ -1,7 +1,8 @@
 package de.piinguiin.lootbox.animations.falling;
 
-import de.piinguiin.lootbox.animations.particle.SingleHelixAnimation;
+import de.piinguiin.lootbox.animations.particle.SingleHelixParticleEffectAnimationAnimation;
 import de.piinguiin.lootbox.api.AbstractActiveAnimation;
+import de.piinguiin.lootbox.utils.item.SkullMaker;
 import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
 import de.piinguiin.lootbox.utils.particle.colorable.ColoredParticle;
 import net.minecraft.server.v1_8_R3.EnumParticle;
@@ -17,8 +18,8 @@ import org.jetbrains.annotations.NotNull;
 public class MoonFallingActiveAnimation extends AbstractActiveAnimation implements FallingActiveAnimation {
 
     private final Vector vector;
-    private final SingleHelixAnimation singleHelixAnimation;
-    private final SingleHelixAnimation singleHelixAnimation2;
+    private final SingleHelixParticleEffectAnimationAnimation singleHelixParticleEffectAnimation;
+    private final SingleHelixParticleEffectAnimationAnimation singleHelixParticleEffectAnimation2;
     private final Location center;
     private final ArmorStand little;
 
@@ -28,13 +29,15 @@ public class MoonFallingActiveAnimation extends AbstractActiveAnimation implemen
         vector = new Vector(0, 0.1, 0);
         final double height = ticks * vector.getY();
         this.currentLocation = location.clone().add(0, height, 0);
-        this.singleHelixAnimation = new SingleHelixAnimation(currentLocation, vector.getY(), 0.8, EnumParticle.CLOUD);
-        this.singleHelixAnimation2 = new SingleHelixAnimation(currentLocation, vector.getY(), 0.8, EnumParticle.SPELL_WITCH);
+        this.singleHelixParticleEffectAnimation = new SingleHelixParticleEffectAnimationAnimation(currentLocation, vector.getY(), 0.8, EnumParticle.CLOUD);
+        this.singleHelixParticleEffectAnimation2 = new SingleHelixParticleEffectAnimationAnimation(currentLocation, vector.getY(), 0.8, EnumParticle.SPELL_WITCH);
         this.little = (ArmorStand) this.center.getWorld().spawnEntity(this.center.clone().subtract(0, 0.2, 0), EntityType.ARMOR_STAND);
         this.little.setGravity(false);
         this.little.setVisible(false);
         this.little.setSmall(true);
-        this.little.setHelmet(new ItemStack(Material.CHEST));
+        final ItemStack littleHead = new SkullMaker().withSkinUrl("http://textures.minecraft.net/texture/d5c6dc2bbf51c36cfc7714585a6a5683ef2b14d47d8ff714654a893f5da622")
+                .build();
+        this.little.setHelmet(littleHead);
     }
 
     @Override
@@ -46,8 +49,8 @@ public class MoonFallingActiveAnimation extends AbstractActiveAnimation implemen
     public void tick() {
         if (isAirDownwards()) {
             currentLocation.subtract(vector);
-            this.singleHelixAnimation.onUpdate();
-            this.singleHelixAnimation2.onUpdate();
+            this.singleHelixParticleEffectAnimation.onUpdate();
+            this.singleHelixParticleEffectAnimation2.onUpdate();
 
 
             new ParticleBuilder(this.center.clone().add(0, 0.6, 0)).setEnumParticle(EnumParticle.FIREWORKS_SPARK)

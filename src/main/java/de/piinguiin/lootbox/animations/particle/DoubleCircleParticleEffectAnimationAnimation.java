@@ -4,14 +4,14 @@ import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Location;
 
-public class DoubleCircleAnimation extends AnimatedParticleEffect {
+public class DoubleCircleParticleEffectAnimationAnimation extends ParticleEffectAnimation {
 
     private final double radius;
     private final EnumParticle particle;
     private int i;
     private final Location location;
 
-    public DoubleCircleAnimation(final Location location, final double radius, final EnumParticle particle) {
+    public DoubleCircleParticleEffectAnimationAnimation(final Location location, final double radius, final EnumParticle particle) {
         this.radius = radius;
         this.particle = particle;
         this.i = 0;

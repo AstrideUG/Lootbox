@@ -60,7 +60,11 @@ public class PlayerInteractAtHead extends Listener {
             return;
         }
 
+        if (!(event.getRightClicked() instanceof ArmorStand)) {
+            return;
+        }
 
+        event.setCancelled(true);
         final CombinedActiveAnimation combinedActiveAnimation = LootboxPlugin.getLootboxManager().getRunningCombinedAnimations().get(player.getUniqueId());
         final Animation animation = combinedActiveAnimation.getAnimations().get(combinedActiveAnimation.getCurrentAnimationPosition());
 

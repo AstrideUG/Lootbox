@@ -1,11 +1,11 @@
 package de.piinguiin.lootbox.animations.particle.colored;
 
-import de.piinguiin.lootbox.animations.particle.AnimatedParticleEffect;
+import de.piinguiin.lootbox.animations.particle.ParticleEffectAnimation;
 import de.piinguiin.lootbox.utils.particle.colorable.ColoredParticle;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
-public class ColoredCrossedBallAnimation extends AnimatedParticleEffect {
+public class ColoredCrossedBallAnimation extends ParticleEffectAnimation {
 
     private final Location location;
     private final double maxHeight;
