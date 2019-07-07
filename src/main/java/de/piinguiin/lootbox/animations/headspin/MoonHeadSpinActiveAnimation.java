@@ -1,6 +1,6 @@
 package de.piinguiin.lootbox.animations.headspin;
 
-import de.piinguiin.lootbox.animations.particle.ColoredDoubleCircleAnimation;
+import de.piinguiin.lootbox.animations.particle.colored.ColoredDoubleCircleAnimation;
 import de.piinguiin.lootbox.api.AbstractActiveAnimation;
 import de.piinguiin.lootbox.api.headable.Headable;
 import de.piinguiin.lootbox.api.headable.HeadableUtils;
@@ -31,6 +31,7 @@ public class MoonHeadSpinActiveAnimation extends AbstractActiveAnimation impleme
         super.start(location);
         armorStand = HeadableUtils.spawnArmorStand(location.clone().add(0.5, 0, 0.5), head);
         circle = new ColoredDoubleCircleAnimation(0.7, 255, 255, 255, armorStand.getEyeLocation());
+        //this.circle = new ColoredCrossedBallAnimation(armorStand.getEyeLocation().clone().subtract(0, 0.2, 0), 0.7, 0.7, 255, 255, 255);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class MoonHeadSpinActiveAnimation extends AbstractActiveAnimation impleme
     @Override
     public void finish() {
         super.finish();
-        new ParticleBuilder(armorStand.getEyeLocation()).setEnumParticle(EnumParticle.FLAME).setAmount(50)
+        new ParticleBuilder(armorStand.getEyeLocation()).setEnumParticle(EnumParticle.FIREWORKS_SPARK).setAmount(50)
                 .setSpeed(1)
                 .setOffSet(0.15F, 0.15F, 0.15F)
                 .play();

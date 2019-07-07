@@ -59,7 +59,7 @@ public abstract class AbstractGivingActiveAnimation extends AbstractActiveAnimat
 
     @Override
     public void finish() {
-
+        super.finish();
         if (base == null) {
             return;
         }
@@ -70,5 +70,6 @@ public abstract class AbstractGivingActiveAnimation extends AbstractActiveAnimat
 
         base.remove();
         this.clusteredHologram.despawn();
+        target.sendMessage("abstract.giving.active.finish");
     }
 }
