@@ -5,6 +5,7 @@ import net.darkdevelopers.darkbedrock.darkness.general.functions.FormattingUtils
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class LootboxPrize {
 
@@ -15,11 +16,11 @@ public class LootboxPrize {
     int percent;
     private final LootboxPrizeRarity rarity;
 
-    public LootboxPrize(final String displayName, final ItemStack item, final int amount, final boolean money, final int percent, final LootboxPrizeRarity rarity) {
+    public LootboxPrize(final String displayName, @NotNull final ItemStack item, final int amount, final int percent, final LootboxPrizeRarity rarity) {
         this.displayName = displayName;
         this.item = item;
         this.amount = amount;
-        this.money = money;
+        this.money = item.getType().equals(Material.DOUBLE_PLANT);
         this.percent = percent;
         this.rarity = rarity;
     }

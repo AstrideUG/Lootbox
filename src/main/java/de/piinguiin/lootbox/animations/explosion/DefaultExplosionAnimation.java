@@ -22,7 +22,7 @@ public class DefaultExplosionAnimation extends AbstractLocationable implements E
         new ParticleBuilder(currentLocation)
                 .setEnumParticle(EnumParticle.EXPLOSION_HUGE).setAmount(1).play();
 
-        for (final Entity near : location.getWorld().getNearbyEntities(currentLocation, 3, 3, 3)) {
+        for (final Entity near : location.getWorld().getNearbyEntities(currentLocation, 3.5, 3.5, 3.5)) {
             near.setVelocity(near.getLocation().getDirection().multiply(-1).setY(0.4));
         }
 

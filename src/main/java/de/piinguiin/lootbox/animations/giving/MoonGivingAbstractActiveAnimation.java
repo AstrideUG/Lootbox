@@ -30,10 +30,12 @@ public class MoonGivingAbstractActiveAnimation extends AbstractGivingActiveAnima
         super.start(location);
         this.crossedBallAnimation = new CrossedBallAnimation(base.getEyeLocation().clone().subtract(0, 0.2, 0),
                 0.4D, EnumParticle.VILLAGER_HAPPY, 0.5);
+
     }
 
     @Override
     public void tick() {
+
         this.crossedBallAnimation.onUpdate();
 
         if (dropTick == 5) {
