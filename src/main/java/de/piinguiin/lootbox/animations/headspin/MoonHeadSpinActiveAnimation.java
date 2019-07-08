@@ -19,6 +19,7 @@ public class MoonHeadSpinActiveAnimation extends AbstractActiveAnimation impleme
     private double y = 0.0;
     private ColoredDoubleCircleAnimation circle;
 
+
     public MoonHeadSpinActiveAnimation(@NotNull final Location location, @NotNull final ItemStack head,
                                        final int ticks, final int period) {
         super(location, ticks, period);
@@ -39,8 +40,9 @@ public class MoonHeadSpinActiveAnimation extends AbstractActiveAnimation impleme
         if (armorStand != null) {
 
             this.circle.onUpdate();
+
             armorStand.setHeadPose(new EulerAngle(0.0, y, 0.0));
-            y += 0.025;
+            y += 0.05;//0.025
 
         } else finish();
     }

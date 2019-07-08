@@ -1,6 +1,6 @@
 package de.piinguiin.lootbox.animations.falling;
 
-import de.piinguiin.lootbox.animations.particle.SingleHelixParticleEffectAnimationAnimation;
+import de.piinguiin.lootbox.animations.particle.SingleHelixParticleEffectAnimation;
 import de.piinguiin.lootbox.api.AbstractActiveAnimation;
 import de.piinguiin.lootbox.utils.item.SkullMaker;
 import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
@@ -18,8 +18,8 @@ import org.jetbrains.annotations.NotNull;
 public class MoonFallingActiveAnimation extends AbstractActiveAnimation implements FallingActiveAnimation {
 
     private final Vector vector;
-    private final SingleHelixParticleEffectAnimationAnimation singleHelixParticleEffectAnimation;
-    private final SingleHelixParticleEffectAnimationAnimation singleHelixParticleEffectAnimation2;
+    private final SingleHelixParticleEffectAnimation singleHelixParticleEffectAnimation;
+    private final SingleHelixParticleEffectAnimation singleHelixParticleEffectAnimation2;
     private final Location center;
     private final ArmorStand little;
 
@@ -29,8 +29,8 @@ public class MoonFallingActiveAnimation extends AbstractActiveAnimation implemen
         vector = new Vector(0, 0.1, 0);
         final double height = ticks * vector.getY();
         this.currentLocation = location.clone().add(0, height, 0);
-        this.singleHelixParticleEffectAnimation = new SingleHelixParticleEffectAnimationAnimation(currentLocation, vector.getY(), 0.8, EnumParticle.CLOUD);
-        this.singleHelixParticleEffectAnimation2 = new SingleHelixParticleEffectAnimationAnimation(currentLocation, vector.getY(), 0.8, EnumParticle.SPELL_WITCH);
+        this.singleHelixParticleEffectAnimation = new SingleHelixParticleEffectAnimation(currentLocation, vector.getY(), 0.8, EnumParticle.CLOUD);
+        this.singleHelixParticleEffectAnimation2 = new SingleHelixParticleEffectAnimation(currentLocation, vector.getY(), 0.8, EnumParticle.SPELL_WITCH);
         this.little = (ArmorStand) this.center.getWorld().spawnEntity(this.center.clone().subtract(0, 0.2, 0), EntityType.ARMOR_STAND);
         this.little.setGravity(false);
         this.little.setVisible(false);

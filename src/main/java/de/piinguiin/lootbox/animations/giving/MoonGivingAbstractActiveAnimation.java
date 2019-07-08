@@ -21,6 +21,7 @@ public class MoonGivingAbstractActiveAnimation extends AbstractGivingActiveAnima
 
     private final List<DelayedAnimation> delayedAnimations;
 
+
     public MoonGivingAbstractActiveAnimation(@NotNull final Location startLocation, final int ticks,
                                              @NotNull final Entity target, @NotNull final LootboxPrize lootboxPrize) {
         super(startLocation, ticks, target, lootboxPrize);

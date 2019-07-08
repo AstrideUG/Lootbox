@@ -29,6 +29,7 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
         startNext(location);
     }
 
+
     @Override
     public final void tick() {
 
@@ -72,14 +73,4 @@ public class AbstractCombinedActiveAnimation extends AbstractActiveAnimation imp
         nextAnimation.start(location);
     }
 
-    @Override
-    public String toString() {
-        return "AbstractCombinedActiveAnimation{" +
-                "animations=" + animations +
-                ", currentAnimationPosition=" + currentAnimationPosition +
-                ", ticks=" + ticks +
-                ", finished=" + finished +
-                ", currentLocation=" + currentLocation +
-                '}';
-    }
 }

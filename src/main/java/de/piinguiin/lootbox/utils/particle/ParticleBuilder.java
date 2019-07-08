@@ -26,6 +26,11 @@ public class ParticleBuilder {
         this.offZ = 0;
     }
 
+    public ParticleBuilder(final Location location, final EnumParticle particle) {
+        this(location);
+        setEnumParticle(particle);
+    }
+
     public ParticleBuilder setEnumParticle(final EnumParticle enumParticle) {
         this.enumParticle = enumParticle;
         return this;
