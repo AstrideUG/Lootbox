@@ -5,7 +5,7 @@ import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
-public class CrossedBallParticleEffectAnimation extends ParticleEffectAnimation {
+public class CrossedBallParticleEffect extends ParticleEffect {
 
     private final Location location;
     private final double maxHeight;
@@ -15,7 +15,7 @@ public class CrossedBallParticleEffectAnimation extends ParticleEffectAnimation 
     float height;
     int step;
 
-    public CrossedBallParticleEffectAnimation(final Location location, final double maxHeight, final EnumParticle particle, final double radius) {
+    public CrossedBallParticleEffect(final Location location, final double maxHeight, final EnumParticle particle, final double radius) {
         this.location = location;
         this.maxHeight = maxHeight;
         this.particle = particle;

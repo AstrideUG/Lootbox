@@ -1,6 +1,6 @@
 package de.piinguiin.lootbox.animations.headspin;
 
-import de.piinguiin.lootbox.animations.particle.colored.ColoredDoubleCircle;
+import de.piinguiin.lootbox.animations.particle.colored.ColoredCrossedBallAnimation;
 import de.piinguiin.lootbox.api.AbstractActiveAnimation;
 import de.piinguiin.lootbox.api.headable.Headable;
 import de.piinguiin.lootbox.api.headable.HeadableUtils;
@@ -12,16 +12,16 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 import org.jetbrains.annotations.NotNull;
 
-public class MoonHeadSpinActiveAnimation extends AbstractActiveAnimation implements HeadSpinActiveAnimation, Headable {
+public class GalacticHeadSpinActiveAnimation extends AbstractActiveAnimation implements HeadSpinActiveAnimation, Headable {
 
     private final ItemStack head;
     private ArmorStand armorStand;
     private double y = 0.0;
-    private ColoredDoubleCircle circle;
+    private ColoredCrossedBallAnimation circle;
 
 
-    public MoonHeadSpinActiveAnimation(@NotNull final Location location, @NotNull final ItemStack head,
-                                       final int ticks, final int period) {
+    public GalacticHeadSpinActiveAnimation(@NotNull final Location location, @NotNull final ItemStack head,
+                                           final int ticks, final int period) {
         super(location, ticks, period);
         this.head = head;
     }
@@ -31,7 +31,7 @@ public class MoonHeadSpinActiveAnimation extends AbstractActiveAnimation impleme
     public void start(@NotNull final Location location) {
         super.start(location);
         armorStand = HeadableUtils.spawnArmorStand(location.clone().add(0.5, 0, 0.5), head);
-        circle = new ColoredDoubleCircle(0.7, 255, 255, 255, armorStand.getEyeLocation());
+        circle = new ColoredCrossedBallAnimation(armorStand.getEyeLocation().clone().subtract(0, 0.2, 0), 0.7, 0.7, 255, 255, 255);
         //this.circle = new ColoredCrossedBallAnimation(armorStand.getEyeLocation().clone().subtract(0, 0.2, 0), 0.7, 0.7, 255, 255, 255);
     }
 

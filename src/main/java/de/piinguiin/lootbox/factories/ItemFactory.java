@@ -39,4 +39,12 @@ public class ItemFactory {
         return skullMaker.build();
     }
 
+    public static ItemStack getComete() {
+
+        final ItemStack item = new SkullMaker()
+                .withSkinUrl("http://textures.minecraft.net/texture/27ad96cb2a4b14d0161f287994d3db187afd87164f3987b87e7f118d1f5879").build();
+        return item;
+
+    }
+
 }

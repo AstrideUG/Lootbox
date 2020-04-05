@@ -1,11 +1,10 @@
 package de.piinguiin.lootbox.animations.particle;
 
 import de.piinguiin.lootbox.utils.VectorUtils;
-import de.piinguiin.lootbox.utils.particle.colorable.ParticleEffect;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
-public class AtomParticleEffectAnimation extends ParticleEffectAnimation {
+public class AtomParticleEffect extends ParticleEffect {
 
     private final double radius;
 
@@ -21,7 +20,7 @@ public class AtomParticleEffectAnimation extends ParticleEffectAnimation {
 
     private final Location location;
 
-    public AtomParticleEffectAnimation(final Location center) {
+    public AtomParticleEffect(final Location center) {
         this.location = center.clone();
         this.radius = 3.0D;
         this.particlesOrbital = 10;
@@ -29,8 +28,8 @@ public class AtomParticleEffectAnimation extends ParticleEffectAnimation {
         this.rotation = 0.0D;
     }
 
-    public AtomParticleEffectAnimation(final double radius, final int particlesOrbital, final int orbitals,
-                                       final double rotation, final Location location) {
+    public AtomParticleEffect(final double radius, final int particlesOrbital, final int orbitals,
+                              final double rotation, final Location location) {
         this.radius = radius;
         this.particlesOrbital = particlesOrbital;
         this.orbitals = orbitals;
@@ -49,7 +48,7 @@ public class AtomParticleEffectAnimation extends ParticleEffectAnimation {
                 VectorUtils.rotateAroundAxisX(v, xRotation);
                 VectorUtils.rotateAroundAxisY(v, this.rotation);
                 location.add(v);
-                ParticleEffect.DRIP_LAVA.display(0, 0, 0, 0, 1, location, 100);
+                de.piinguiin.lootbox.utils.particle.colorable.ParticleEffect.DRIP_LAVA.display(0, 0, 0, 0, 1, location, 100);
                 location.subtract(v);
             }
             this.step++;

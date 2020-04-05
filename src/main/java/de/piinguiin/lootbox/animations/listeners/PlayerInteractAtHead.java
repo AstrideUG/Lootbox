@@ -1,12 +1,10 @@
 package de.piinguiin.lootbox.animations.listeners;
 
 import de.piinguiin.lootbox.LootboxPlugin;
-import de.piinguiin.lootbox.animations.combined.MoonCombinedActiveAnimation;
 import de.piinguiin.lootbox.animations.headspin.HeadSpinActiveAnimation;
+import de.piinguiin.lootbox.animations.headspin.TestRun;
 import de.piinguiin.lootbox.api.Animation;
 import de.piinguiin.lootbox.api.combined.CombinedActiveAnimation;
-import de.piinguiin.lootbox.prizes.LootboxPrize;
-import de.piinguiin.lootbox.types.LootboxManager;
 import net.darkdevelopers.darkbedrock.darkness.spigot.listener.Listener;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -15,7 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class PlayerInteractAtHead extends Listener {
 
@@ -41,11 +38,25 @@ public class PlayerInteractAtHead extends Listener {
 
         if (block.getType().equals(Material.COBBLE_WALL)) {
             event.setCancelled(true);
+            /*
             final LootboxPrize prize = new LootboxPrize("§6§lToller Gewinn", new ItemStack(Material.BOOK), 1, 100, LootboxPrize.LootboxPrizeRarity.RARE);
             final MoonCombinedActiveAnimation moonCombinedActiveAnimation = new MoonCombinedActiveAnimation(block.getLocation(), player, prize);
             moonCombinedActiveAnimation.start(block.getLocation().clone().add(0.5, 0, 0.5));
             final LootboxManager lootboxManager = LootboxPlugin.getLootboxManager();
             lootboxManager.getRunningCombinedAnimations().put(player.getUniqueId(), moonCombinedActiveAnimation);
+
+
+            final LootboxPrize prize = new LootboxPrize("§6§lBuch", new ItemStack(Material.BOOK), 1, 100, LootboxPrize.LootboxPrizeRarity.LEGENDARY);
+            final GalacticCombinedActiveAnimation galacticCombinedActiveAnimation = new GalacticCombinedActiveAnimation(block.getLocation(), player, prize);
+            galacticCombinedActiveAnimation.start(block.getLocation().clone().add(0.5, 0, 0.5));
+            final LootboxManager lootboxManager = LootboxPlugin.getLootboxManager();
+            lootboxManager.getRunningCombinedAnimations().put(player.getUniqueId(), galacticCombinedActiveAnimation);
+*/
+
+            new TestRun(block.getLocation().clone().add(0.5, 1, 0.5)) {
+
+            }.runTaskTimer(LootboxPlugin.getPlugin(), 0, 1);
+
         }
 
     }

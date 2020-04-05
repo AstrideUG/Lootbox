@@ -1,6 +1,6 @@
 package de.piinguiin.lootbox.animations.particle;
 
-public abstract class ParticleEffectAnimation {
+public abstract class ParticleEffect {
 
     public abstract void onUpdate();
 

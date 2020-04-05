@@ -1,19 +1,17 @@
-package de.piinguiin.lootbox.animations.particle;
+package de.piinguiin.lootbox.animations.particle.colored;
 
-import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
-import net.minecraft.server.v1_8_R3.EnumParticle;
+import de.piinguiin.lootbox.animations.particle.ParticleEffect;
+import de.piinguiin.lootbox.utils.particle.colorable.ColoredParticle;
 import org.bukkit.Location;
 
-public class DoubleCircleParticleEffectAnimation extends ParticleEffectAnimation {
+public class RainbowDoubleCircle extends ParticleEffect {
 
     private final double radius;
-    private final EnumParticle particle;
     private int i;
     private final Location location;
 
-    public DoubleCircleParticleEffectAnimation(final Location location, final double radius, final EnumParticle particle) {
+    public RainbowDoubleCircle(final Location location, final double radius) {
         this.radius = radius;
-        this.particle = particle;
         this.i = 0;
         this.location = location.clone();
     }
@@ -31,8 +29,8 @@ public class DoubleCircleParticleEffectAnimation extends ParticleEffectAnimation
 
         particleLocA.add(x, 0, z);
         particleLocB.add(-x, 0, -z);
-        new ParticleBuilder(particleLocA).setEnumParticle(this.particle).play();
-        new ParticleBuilder(particleLocB).setEnumParticle(this.particle).play();
+        ColoredParticle.RED_DUST.sendRandomColor(particleLocA);
+        ColoredParticle.RED_DUST.sendRandomColor(particleLocB);
 
     }
 }

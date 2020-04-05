@@ -4,7 +4,7 @@ import de.piinguiin.lootbox.utils.particle.ParticleBuilder;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Location;
 
-public class SpiralParticleEffectAnimation extends ParticleEffectAnimation {
+public class SpiralParticleEffect extends ParticleEffect {
 
     private final Location location;
     private final EnumParticle particle;
@@ -15,8 +15,8 @@ public class SpiralParticleEffectAnimation extends ParticleEffectAnimation {
     private final Dircetion dircetion;
     private final int particleAmount, ySpeed;
 
-    public SpiralParticleEffectAnimation(final Location location, final EnumParticle particle, final double radius,
-                                         final double height, final double angle, final int particleAmount, final int ySpeed, final Dircetion dircetion) {
+    public SpiralParticleEffect(final Location location, final EnumParticle particle, final double radius,
+                                final double height, final double angle, final int particleAmount, final int ySpeed, final Dircetion dircetion) {
         this.location = location;
         this.particle = particle;
         this.radius = radius;
